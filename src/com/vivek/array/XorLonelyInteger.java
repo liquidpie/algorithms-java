@@ -19,7 +19,7 @@ public class XorLonelyInteger {
         System.out.println(num);
     }
 
-    private static int findLonelyIntegerBySet(int[] arr) {
+    private static int findLonelyIntegerBySet(int[] arr) { // solution 1
         Set<Integer> set = new HashSet<>();
         for (int i : arr) {
             if (!set.add(i)) {
@@ -30,7 +30,7 @@ public class XorLonelyInteger {
         return a[0].intValue();
     }
 
-    private static int findLonelyIntegerByXor(int[] arr) {
+    private static int findLonelyIntegerByXor(int[] arr) { // solution 2
         int value = 0;
         for (int i : arr)
             value ^= i;
