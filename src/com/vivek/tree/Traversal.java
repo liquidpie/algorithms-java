@@ -75,7 +75,7 @@ public class Traversal {
 
     /* Level order traversal using Queue */
     /**
-     * 1) Create an empty com.vivek.queue q
+     * 1) Create an empty queue q
      * 2) temp_node = root //start from root
      * 3) Loop while temp_node is not NULL
 		    a) print temp_node->data.
