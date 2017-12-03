@@ -5,12 +5,12 @@ import java.util.Arrays;
 /**
  * Created by VJaiswal on 04/04/17.
  *
- * Given an com.vivek.array, we need to find maximum sum subarray, removing one element is allowed to get the maximum sum.
+ * Given an array, we need to find maximum sum subarray, removing one element is allowed to get the maximum sum.
  * Not consecutive numbers could be removed
  *
  * Ex:
- * 1. com.vivek.array = {9, -1, -3, 4, 5}, result = 17;
- * 2. com.vivek.array = {-1, -2, -3, -4, -5}, result = -6;
+ * 1. array = {9, -1, -3, 4, 5}, result = 17;
+ * 2. array = {-1, -2, -3, -4, -5}, result = -6;
  */
 public class MaxSumSubArrayDelAtMostOneElement {
 
@@ -39,7 +39,7 @@ public class MaxSumSubArrayDelAtMostOneElement {
             curMax = Math.max(arr[i], curMax + arr[i]);
             maxSoFar = Math.max(maxSoFar, curMax);
 
-//        storing current maximum till ith, in forward com.vivek.array
+//        storing current maximum till ith, in forward array
             fwdArr[i] = curMax;
         }
 
@@ -52,7 +52,7 @@ public class MaxSumSubArrayDelAtMostOneElement {
             curMax = Math.max(arr[i], curMax + arr[i]);
             maxSoFar = Math.max(maxSoFar, curMax);
 
-//        storing current maximum till ith, in forward com.vivek.array
+//        storing current maximum till ith, in forward array
             bkdArr[i] = curMax;
             i--;
         }

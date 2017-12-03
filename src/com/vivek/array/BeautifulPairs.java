@@ -8,7 +8,7 @@ import java.util.Scanner;
 
  You are given two arrays,  and , both containing  integers.
 
- A pair of indices  is beautiful if the  element of com.vivek.array  is equal to the  element of com.vivek.array . In other words, pair  is beautiful if and only if .
+ A pair of indices  is beautiful if the x element of array  is equal to the y element of array . In other words, pair  is beautiful if and only if .
 
  Given  and , there are  pairs of beautiful indices . A pair of indices in this set is pairwise disjoint if and only if for each  it holds that  and .
 

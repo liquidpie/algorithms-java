@@ -32,7 +32,7 @@ public class LeftView {
     /* testing for example nodes */
     public static void main(String args[])
     {
-        /* creating a binary com.vivek.tree and entering the nodes */
+        /* creating a binary tree and entering the nodes */
     	LeftView tree = new LeftView();
         tree.root = new Node(12);
         tree.root.left = new Node(10);

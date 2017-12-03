@@ -4,7 +4,7 @@ import java.util.HashSet;
 import java.util.Set;
 
 /**
- * Consider an com.vivek.array of  integers, , where all but one of the integers occur in pairs.
+ * Consider an array of n integers, , where all but one of the integers occur in pairs.
  * In other words, every element in  occurs exactly twice except for one unique element.
  *
  * Given , find and print the unique element.

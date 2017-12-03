@@ -4,12 +4,12 @@ import java.util.Arrays;
 import java.util.Scanner;
 
 /**
- * Given a sorted com.vivek.array of integers print a no of triplets( 3 elements)
+ * Given a sorted array of integers print a no of triplets( 3 elements)
  * whose sum is 0.If there is no such triplet print 0.
- * Integers in the com.vivek.array can be repeated, so there can be repeated triplets whose sum is zero.
+ * Integers in the array can be repeated, so there can be repeated triplets whose sum is zero.
  * You have to implement the function findTriplet(int []) and your 
  * function should print the number of triplets whose sum is 0.  
- * For example if given com.vivek.array is A= {-9,-4,1,2,3,8} your function should print 2 ,
+ * For example if given array is A= {-9,-4,1,2,3,8} your function should print 2 ,
  * as there are two triplets whose sum is zero (1,3,-4) and (1,8,-9).
  */
 public class SumTriplet {
