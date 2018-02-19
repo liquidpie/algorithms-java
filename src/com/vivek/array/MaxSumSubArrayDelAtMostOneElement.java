@@ -35,7 +35,7 @@ public class MaxSumSubArrayDelAtMostOneElement {
         int maxSoFar = arr[0];
 
 //        calculating maximum sum subarrays in forward direction
-        for (int i = 0; i < n; i++) {
+        for (int i = 1; i < n; i++) {
             curMax = Math.max(arr[i], curMax + arr[i]);
             maxSoFar = Math.max(maxSoFar, curMax);
 

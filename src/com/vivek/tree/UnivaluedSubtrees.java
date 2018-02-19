@@ -5,26 +5,26 @@ import java.util.List;
 import java.util.Scanner;
 
 /**
- * In this problem you are given a com.vivek.tree of N nodes.Each of the nodes
+ * In this problem you are given a tree of N nodes.Each of the nodes
  * will be numbered from 0 to N-1 and each node i(node numbered i) is 
- * associated with a value vi.Assume the com.vivek.tree is rooted at node 0.A node Y
+ * associated with a value vi.Assume the tree is rooted at node 0.A node Y
  * is said to be desecented of node X if X occurs in the path from node Y 
  * to node 0. A subtree rooted at node X is defined as set of all nodes 
- * which are decendants of X and edges Between them( including X). 
- * A subtree is called univalued if the value of all the nides in the subtree are equal. 
- * Now give the com.vivek.tree and the values associated with nodes in the com.vivek.tree .
- * You are required to find the number of rooted univalued subtrees in the com.vivek.tree.
+ * which are descendants of X and edges Between them( including X).
+ * A subtree is called univalued if the value of all the nodes in the subtree are equal.
+ * Now give the tree and the values associated with nodes in the tree .
+ * You are required to find the number of rooted univalued subtrees in the tree.
  * 
  * Input: 
- * First line contains an interger N which is the number o0f nodes in the com.vivek.tree .
+ * First line contains an integer N which is the number o0f nodes in the tree .
  * Next N lines contain an integer each which are values associated with nodes i.e, 
  * ith line contains the value associated  with node i-1.Next N-1 lines give the 
- * information of edges in the com.vivek.tree .Each line contains two Space separated integers
+ * information of edges in the tree. Each line contains two Space separated integers
  *  X and Y which says that there is an edge between node X and node Y. 
  *  
  * Output: 
- * Given the input of com.vivek.tree in above format you have to print the number of Univalued
- * subtrees that are contained in the given com.vivek.tree.You just have tp print a single integer.
+ * Given the input of tree in above format you have to print the number of Univalued
+ * subtrees that are contained in the given tree.You just have tp print a single integer.
  * 
  * Sample Input:
  * 5 

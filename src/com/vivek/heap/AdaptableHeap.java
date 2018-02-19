@@ -29,13 +29,13 @@ public class AdaptableHeap {
     private void upheap(int i) {
         while (i > 0) { // continue until reaching root
             int p = parent(i);
-            if (heap.get(i).compareTo(heap.get(p)) >= 0) break; // com.vivek.heap propery defined
+            if (heap.get(i).compareTo(heap.get(p)) >= 0) break; // heap property defined
             swap(i, p);
             i = p;
         }
     }
 
-    // restores the com.vivek.heap order property by moving the entry at index i upward/downward
+    // restores the heap order property by moving the entry at index i upward/downward
     private void bubble(int i) {
         if (i > 0 && heap.get(i).compareTo(heap.get(parent(i))) < 0) {
             upheap(i);
@@ -55,7 +55,7 @@ public class AdaptableHeap {
                 }
             }
             if (heap.get(smallIdx).compareTo(heap.get(i)) >= 0)
-                break; // com.vivek.heap property has been restored
+                break; // heap property has been restored
             swap(i, smallIdx);
             i = smallIdx; // continue at position of the child
         }

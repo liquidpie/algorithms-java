@@ -4,6 +4,17 @@ import java.util.*;
 
 /**
  * Created by VJaiswal on 23/02/17.
+ *
+ *
+
+ Dijkstra partitions all nodes into two distinct sets: unsettled and settled. Initially all nodes are in the unsettled sets, e.g. they must be still evaluated. A node is moved to the settled set if a shortest path from the source to this node has been found.
+
+ Initially the distance of each node to the source is set to a very high value.
+
+ First only the source is in the set of unsettledNodes. The algorithms runs until the unsettledNodes are empty. In each iteration it selects the node with the lowest distance from the source out of the unsettled nodes. It reads all edges which are outgoing from the source and evaluates for each destination node, in the edges which are not yet settled, if the known distance from the source to this node can be reduced while using the selected edge. If this can be done then the distance is updated and the node is added to the nodes which need evaluation.
+
+ *
+ * source: http://www.vogella.com/tutorials/JavaAlgorithmsDijkstra/article.html
  */
 public class DijkstraAlgo {
 
@@ -27,7 +38,7 @@ public class DijkstraAlgo {
 
         distance.put(s, 0);
         unsettledNodes.add(s);
-        while (unsettledNodes.size() > 0) {
+        while (!unsettledNodes.isEmpty()) {
             Vertex node = getMinimum(unsettledNodes);
             settledNodes.add(node);
             unsettledNodes.remove(node);
