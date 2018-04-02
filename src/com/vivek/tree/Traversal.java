@@ -6,7 +6,7 @@ import java.util.Queue;
 public class Traversal {
 
 	/* Pre Order */
-	void preOrder(Node root) {
+	public void preOrder(Node root) {
 	    if (root == null) {
 	        return;
 	    }
@@ -16,7 +16,7 @@ public class Traversal {
 	}
 	
 	/* Post Order */
-	void postOrder(Node root) {
+	public void postOrder(Node root) {
 	    if (root == null) {
 	        return;
 	    }
@@ -26,7 +26,7 @@ public class Traversal {
 	}
 	
 	/* In Order */
-	void inOrder(Node root) {
+	public void inOrder(Node root) {
 	    if (root == null) {
 	        return;
 	    }
@@ -82,7 +82,7 @@ public class Traversal {
 		    b) Enqueue temp_node�s children (first left then right children) to q
 		    c) Dequeue a node from q and assign it�s value to temp_node
      */
-    void printLevelOrder(Node root) 
+    public void printLevelOrder(Node root)
     {
         Queue<Node> queue = new LinkedList<Node>();
         queue.add(root);
