@@ -13,7 +13,6 @@ import java.util.Set;
  * whenever any entry is accessed, it will be moved to top.
  * So that recently used entries will be on Top and Least used will be on Bottom.
  *
- * https://medium.com/@krishankantsinghal/my-first-blog-on-medium-583159139237
  */
 public class LRUCache<K, V> {
 
