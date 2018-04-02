@@ -85,32 +85,32 @@ public class LRUCache<K, V> {
     }
 
     private void splayOnTop(Entry<K, V> entry) {
-        entry.right = head;
+        entry.next = head;
         if (head != null)           // when linkedlist not empty
-            head.left = entry;
+            head.prev = entry;
         head = entry;
         if (tail == null)           // when first entry
             tail = head;
     }
 
     private void remove(Entry<K, V> entry) {
-        if (entry.left != null) {
-            entry.left.right = entry.right;
+        if (entry.prev != null) {
+            entry.prev.next = entry.next;
         } else {
-            head = entry.right;
+            head = entry.next;
         }
-        if (entry.right != null) {
-            entry.right.left = entry.left;
+        if (entry.next != null) {
+            entry.next.prev = entry.prev;
         } else {
-            tail = entry.left;
+            tail = entry.prev;
         }
     }
 
     private static class Entry<K, V> {
         K key;
         V value;
-        Entry left;
-        Entry right;
+        Entry prev;
+        Entry next;
     }
 
     public static void main(String[] args) {
