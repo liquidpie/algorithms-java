@@ -23,7 +23,7 @@ public class LRUCache<K, V> {
     private Entry<K, V> head, tail;
 
     public LRUCache() {
-        this(16);
+        this(16);       // default cache size as 16
     }
 
     public LRUCache(int CACHE_SIZE) {
@@ -121,10 +121,14 @@ public class LRUCache<K, V> {
         lruCache.get(2);
         lruCache.put(4, 14);
         lruCache.get(3);
-        lruCache.put(5, 15);
 
+        System.out.println("Cache before eviction");
         System.out.println(lruCache);
 
+        lruCache.put(5, 15);
+
+        System.out.println("Cache after eviction");
+        System.out.println(lruCache);
     }
 
 }
