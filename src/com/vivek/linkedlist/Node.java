@@ -16,4 +16,14 @@ public class Node {
 		}
 	}
 
+	static void print(Node head) {
+		Node node = head;
+		String delimiter = "";
+		while (node != null) {
+			System.out.print(delimiter + node.data);
+			delimiter = " -> ";
+			node = node.next;
+		}
+	}
+
 }
