@@ -1,132 +1,110 @@
 package com.vivek.graph;
 
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
+import java.util.*;
 
 /**
- * Created by VJaiswal on 07/03/17.
+ * Created by VJaiswal on 25/04/18.
  */
-public class Graph<E extends Comparable<E>> {
+public class Graph {
 
-    private List<Vertex<E>> vertices;
-    private List<Edge<E>> edges;
+    private final List<Vertex> vertices;
+    private final List<Edge> edges;
 
-    public Graph(List<Vertex<E>> vertices, List<Edge<E>> edges) {
+    public Graph(List<Vertex> vertices, List<Edge> edges) {
         this.vertices = vertices;
         this.edges = edges;
     }
 
-    public List<Vertex<E>> getVertices() {
+    public List<Vertex> getVertices() {
         return vertices;
     }
 
-    public List<Edge<E>> getEdges() {
+    public List<Edge> getEdges() {
         return edges;
     }
 
-    // Implicit structures
-    public static class Vertex<E extends Comparable<E>> implements Comparable<Vertex<E>> {
-        private final E value;
-        private Map<Vertex<E>, Edge<E>> adjacencyMap;
+    static class Vertex implements Comparable {
+        private final int id;
+        private Map<Vertex, Edge> adjacencyMap;
 
-        public Vertex(E value, Map<Vertex<E>, Edge<E>> adjacencyMap) {
-            this.value = value;
-            if (adjacencyMap != null) {
-                this.adjacencyMap = adjacencyMap;
-            } else {
-                this.adjacencyMap = new HashMap<>();
-            }
+        public Vertex(int id) {
+            this.id = id;
+            adjacencyMap = new HashMap<>();
         }
 
-        public Vertex(E value) {
-            this(value, null);
-        }
+        public int getId() { return id; }
 
-        public E getValue() {
-            return value;
-        }
-
-        public Map<Vertex<E>, Edge<E>> getAdjacencyMap() {
+        public Map<Vertex, Edge> getAdjacencyMap() {
             return adjacencyMap;
         }
 
-        public void addAdjacentEdge(Vertex<E> node, Edge<E> edge) {
+        public Set<Vertex> getAdjacentVertices() {
+            return adjacencyMap.keySet();
+        }
+
+        public Collection<Edge> getAdjacentEdges() {
+            return adjacencyMap.values();
+        }
+
+        public void addAdjacentEdge(Vertex node, Edge edge) {
             adjacencyMap.put(node, edge);
         }
 
         @Override
-        public int compareTo(Vertex<E> o) {
-            Vertex<E> that = o;
-            final int comparison = this.value.compareTo(that.value);
-            if (comparison != 0) {
-                return comparison;
-            }
-            if (this.adjacencyMap.size() < that.adjacencyMap.size()) {
-                return -1;
-            }
-            if (this.adjacencyMap.size() > that.adjacencyMap.size()) {
-                return 1;
-            }
-            return 0;
-        }
-
-        @Override
         public int hashCode() {
-            final int result = this.value.hashCode() + this.adjacencyMap.size();
-            return 31 * result;
+            int prime = 31;
+            int result = 1;
+            return prime * (result + id);
         }
 
         @Override
-        public boolean equals(Object o) {
-            if (this == o) {
-                return true;
-            }
-            if (getClass() != o.getClass()) {
-                return false;
-            }
-            final Vertex<E> that = (Vertex) o;
+        public boolean equals(Object other) {
+            if (this == other) { return true; }
+            if (other == null) { return false; }
+            if (getClass() != other.getClass()) { return false; }
+            Vertex o = (Vertex) other;
+            return this.id == o.id;
+        }
 
-            if (this.value != that.value) {
-                return false;
-            }
-            if (this.adjacencyMap.size() != that.adjacencyMap.size()) {
-                return false;
-            }
-            if (!(this.adjacencyMap.equals(that.adjacencyMap))) {
-                return false;
-            }
-            return true;
+        @Override
+        public int compareTo(Object o) {
+            Vertex other = (Vertex) o;
+            return this.id < other.id ? this.id == other.id ? 0 : -1 : 1;
+        }
+
+        @Override
+        public String toString() {
+            return "Vertex " + this.id;
         }
 
     }
 
-    public static class Edge<E extends Comparable<E>> implements Comparable<Edge<E>> {
+    static class Edge implements Comparable {
+        private final Vertex src;
+        private final Vertex dest;
         private final int weight;
-        private final Vertex<E> src;
-        private final Vertex<E> dest;
 
-        public Edge(Vertex<E> src, Vertex<E> dest, int weight) {
+        public Edge(Vertex src, Vertex dest, int weight) {
             this.src = src;
             this.dest = dest;
             this.weight = weight;
+        }
+
+        public Vertex getSrc() {
+            return src;
+        }
+
+        public Vertex getDest() {
+            return dest;
         }
 
         public int getWeight() {
             return weight;
         }
 
-        public Vertex<E> getSrc() {
-            return src;
-        }
-
-        public Vertex<E> getDest() {
-            return dest;
-        }
-
         @Override
         public int hashCode() {
-            return 31 * (this.weight * this.src.value.hashCode() * this.dest.value.hashCode());
+            return 31 * (this.weight * this.src.id * this.dest.id);
         }
 
         @Override
@@ -137,7 +115,7 @@ public class Graph<E extends Comparable<E>> {
             if (this.getClass() != o.getClass()) {
                 return false;
             }
-            final Edge<E> that = (Edge) o;
+            final Edge that = (Edge) o;
             if (this.weight == that.weight &&
                     this.src == that.src &&
                     this.dest == that.dest) {
@@ -147,16 +125,19 @@ public class Graph<E extends Comparable<E>> {
         }
 
         @Override
-        public int compareTo(Edge<E> o) {
-            Edge<E> that = o;
-            if (this.src == that.src && this.dest == that.dest) {
+        public int compareTo(Object o) {
+            Edge other = (Edge) o;
+            if (this.src == other.src && this.dest == other.dest) {
                 return 0;
             }
-            if (this.weight < that.weight) {
-                return -1;
+            if (this.src == other.dest && this.dest == other.src) {
+                return 0;
             }
-            if (this.weight > that.weight) {
+            if (this.weight > other.weight) {
                 return 1;
+            }
+            if (this.weight < other.weight) {
+                return -1;
             }
             return 0;
         }

@@ -10,34 +10,34 @@ import java.util.HashSet;
  */
 public class UnionFind<E extends Comparable<E>> {
 
-    private HashMap<Graph.Vertex<E>, HashSet<Graph.Vertex<E>>> membershipMap =
+    private HashMap<GenericGraph.Vertex<E>, HashSet<GenericGraph.Vertex<E>>> membershipMap =
             new HashMap<>();
 
-    public UnionFind(Graph<E> graph) {
-        for (Graph.Vertex<E> vertex : graph.getVertices()) {
-            HashSet<Graph.Vertex<E>> set = new HashSet<>();
+    public UnionFind(GenericGraph<E> graph) {
+        for (GenericGraph.Vertex<E> vertex : graph.getVertices()) {
+            HashSet<GenericGraph.Vertex<E>> set = new HashSet<>();
             set.add(vertex);
             membershipMap.put(vertex, set);
         }
     }
 
-    public boolean find(Graph.Vertex<E> v1, Graph.Vertex<E> v2) {
+    public boolean find(GenericGraph.Vertex<E> v1, GenericGraph.Vertex<E> v2) {
         return membershipMap.get(v1) == membershipMap.get(v2);
     }
 
-    public void union(Graph.Vertex<E> v1, Graph.Vertex<E> v2) {
-        HashSet<Graph.Vertex<E>> firstSet = membershipMap.get(v1); // first set is the bigger set
-        HashSet<Graph.Vertex<E>> secondSet = membershipMap.get(v2);
+    public void union(GenericGraph.Vertex<E> v1, GenericGraph.Vertex<E> v2) {
+        HashSet<GenericGraph.Vertex<E>> firstSet = membershipMap.get(v1); // first set is the bigger set
+        HashSet<GenericGraph.Vertex<E>> secondSet = membershipMap.get(v2);
 
         // swap sets so that firstSet is always bigger
         if (secondSet.size() > firstSet.size()) {
-            HashSet<Graph.Vertex<E>> temp = firstSet;
+            HashSet<GenericGraph.Vertex<E>> temp = firstSet;
             firstSet = secondSet;
             secondSet = temp;
         }
 
         // changing part membership of each vertex from smaller set
-        for (Graph.Vertex<E> v : secondSet) {
+        for (GenericGraph.Vertex<E> v : secondSet) {
             membershipMap.put(v, firstSet);
         }
 
