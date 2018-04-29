@@ -1,6 +1,8 @@
 package com.vivek.tree;
 
+import java.util.ArrayList;
 import java.util.LinkedList;
+import java.util.List;
 import java.util.Queue;
 
 public class Traversal {
@@ -106,4 +108,39 @@ public class Traversal {
             }
         }
     }
+
+    /**
+     * Given a binary search tree, design an algorithm which creates a linked list of all the
+     nodes at each depth (eg, if you have a tree with depth D, you’ll have D linked lists).
+     */
+    void listNodesAtEachDepth(Node root) {
+        if (root == null)
+            return;
+
+        List<LinkedList<Node>> result = new ArrayList<>();
+        int level = 0;
+
+        LinkedList<Node> list = new LinkedList<>();
+        list.add(root);
+        result.add(level, list);
+
+        while (true) {
+            if (!result.get(level).isEmpty()) {
+                list = new LinkedList<>();
+                for (int i = 0; i < result.get(level).size(); i++) {
+                    Node node = result.get(level).get(i);
+                    if (node.left != null)
+                        list.add(node.left);
+                    if (node.right != null)
+                        list.add(node.right);
+                }
+                level++;
+                result.add(level, list);
+            }
+            else {
+                break;
+            }
+        }
+    }
+
 }
