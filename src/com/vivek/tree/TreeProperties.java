@@ -67,30 +67,6 @@ public class TreeProperties {
      }
 
     /**
-     * Root to leaf path sum equal to a given number
-     */
-     static boolean hasPathSum(Node node, int sum) {
-         if (node == null) {
-             return sum == 0;
-         }
-
-         boolean ans = false;
-         int subsum = sum - node.data;
-
-         if (subsum == 0 && node.left == null && node.right == null)
-             return true;
-
-         if (node.left != null) {
-             ans = ans || hasPathSum(node.left, subsum);
-         }
-         if (node.right == null) {
-             ans = ans || hasPathSum(node.right, subsum);
-         }
-
-         return ans;
-     }
-
-    /**
      * determine if a binary tree is height-balanced
      * An empty tree is height-balanced. A non-empty binary tree T is balanced if:
      *    1) Left subtree of T is balanced
