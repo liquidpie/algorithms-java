@@ -1,7 +1,7 @@
 package com.vivek.bitmanipulation;
 
 /**
- * Created by VJaiswal on 26/09/17.
+ * Flip the bits of a number excluding the sign bit
  */
 public class ModulusDivisionByPowerOfTwo {
 

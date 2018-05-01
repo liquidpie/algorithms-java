@@ -1,7 +1,7 @@
 package com.vivek.bitmanipulation;
 
 /**
- * Created by VJaiswal on 26/09/17.
+ * Reverse all the bits of given number including sign bit
  */
 public class ReverseBits {
 
