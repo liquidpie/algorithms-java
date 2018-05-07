@@ -2,6 +2,9 @@ package com.vivek.tree.bst;
 
 import com.vivek.tree.Node;
 
+import java.util.ArrayList;
+import java.util.List;
+
 public class BSTProperties {
 
     /**
@@ -38,6 +41,49 @@ public class BSTProperties {
         }
 
         return node.data;
+    }
+
+    /**
+     * Returns node with keys falling in given range
+     */
+    List<Node> findAllNodesInRange(Node root, int min, int max) {
+        List<Node> nodes = new ArrayList<>();
+
+        findAllNodesInRange(root, min, max, nodes);
+
+        return nodes;
+    }
+
+    private void findAllNodesInRange(Node node, int min, int max, List<Node> nodes) {
+        if (node == null)
+            return;
+
+        if (node.data >= min && node.data <= max)
+            nodes.add(node);
+
+        if (node.data > min)
+            findAllNodesInRange(node.left, min, max, nodes);
+
+        if (node.data < max)
+            findAllNodesInRange(node.right, min, max, nodes);
+    }
+
+    public static void main(String[] args) {
+        BSTProperties test = new BSTProperties();
+
+        Node root = new Node(4);
+        root.left = new Node(2);
+        root.right = new Node(6);
+        root.left.left = new Node(1);
+        root.left.right = new Node(3);
+        root.right.left = new Node(5);
+        root.right.right = new Node(7);
+
+        List<Node> nodes = test.findAllNodesInRange(root, 6, 9);
+
+        for (Node node: nodes) {
+            System.out.println(node.data);
+        }
     }
 
 }
