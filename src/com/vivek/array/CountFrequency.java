@@ -34,7 +34,7 @@ public class CountFrequency {
          3)  To print counts, simply print the number of times n
          was added at index corresponding to every element
          for (int i =0; i < n; i++)
-         print "(i + 1) -> arr[i] "
+         print "(i + 1) -> arr[i] / n"
      */
     static void withoutExtraSpace(int[] arr, int n) {
 

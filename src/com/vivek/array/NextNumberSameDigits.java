@@ -34,7 +34,7 @@ public class NextNumberSameDigits {
         char[] arr = String.valueOf(num).toCharArray();
         int n = arr.length;
 
-        int i, j;
+        int i;
 
         // start from the rightmost digit and find the first digit smaller than the digit next to it
         for (i = n - 1; i > 0; i--) {
@@ -50,7 +50,7 @@ public class NextNumberSameDigits {
         // find the smallest digit greater than digit at i
         int x = arr[i - 1];
         int smallest = i;
-        for (j = i; j < n; j++) {
+        for (int j = i; j < n; j++) {
             if (arr[j] > x && arr[j] < smallest) {
                 smallest = arr[j];
             }

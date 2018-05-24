@@ -20,6 +20,8 @@ public class ArrayMisc {
         int n = arr.length;
         int majority = 0;
         int count = 0;
+
+        // find the majority element irrespective of count
         for (int i = 0; i < n; i++) {
             if (count == 0)
                 majority = arr[i];
@@ -31,6 +33,7 @@ public class ArrayMisc {
         
         count = 0;
 
+        // find the count of majority element
         for (int i = 0; i < n; i++) {
             if (arr[i] == majority)
                 count++;
@@ -51,7 +54,7 @@ public class ArrayMisc {
         int n = arr.length;
 
         int i = 0;
-        Stack<Integer> s = new Stack();
+        Stack<Integer> s = new Stack<>();
         int element, next;
 
         /* push the first element to stack */
@@ -61,7 +64,7 @@ public class ArrayMisc {
         for (i = 1; i < n; i++) {
             next = arr[i];
 
-            if (s.isEmpty() == false) {
+            if (!s.isEmpty()) {
 
                 // if stack is not empty, then
                 // pop an element from stack
@@ -73,7 +76,7 @@ public class ArrayMisc {
                    stack is not empty */
                 while (element < next) {
                     System.out.println(element + " --> " + next);
-                    if (s.isEmpty() == true)
+                    if (s.isEmpty())
                         break;
                     element = s.pop();
                 }
@@ -92,10 +95,10 @@ public class ArrayMisc {
         /* After iterating over the loop, the remaining
            elements in stack do not have the next greater
            element, so print -1 for them */
-        while (s.isEmpty() == false) {
+        while (!s.isEmpty()) {
             element = s.pop();
             next = -1;
-            System.out.println(element + " -- " + next);
+            System.out.println(element + " --> " + next);
         }
     }
 

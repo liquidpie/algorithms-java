@@ -15,7 +15,7 @@ package com.vivek.sort;
  * Start from current size equal to n and reduce current size by one while it’s greater than 1.
  * Let the current size be curr_size. Do following for every curr_size
  *
- * a) Find index of the maximum element in arr[0..curr_szie-1]. Let the index be ‘mi’
+ * a) Find index of the maximum element in arr[0..curr_size-1]. Let the index be ‘mi’
  * b) Call flip(arr, mi)
  * c) Call flip(arr, curr_size-1)
  *
