@@ -102,6 +102,10 @@ public class Graph {
             return weight;
         }
 
+        public Vertex opposite(Vertex v) {
+            return v == src ? dest : src;
+        }
+
         @Override
         public int hashCode() {
             return 31 * (this.weight * this.src.id * this.dest.id);
