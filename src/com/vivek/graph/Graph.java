@@ -7,25 +7,50 @@ import java.util.*;
  */
 public class Graph {
 
-    private final List<Vertex> vertices;
+    private final Map<Integer, Vertex> vertices;
     private final List<Edge> edges;
 
+    public Graph() {
+        this.vertices = new HashMap<>();
+        this.edges = new ArrayList<>();
+    }
+
     public Graph(List<Vertex> vertices, List<Edge> edges) {
-        this.vertices = vertices;
+        this.vertices = new HashMap<>();
+        vertices.stream().forEach(vertex -> this.vertices.put(vertex.getId(), vertex));
         this.edges = edges;
     }
 
     public List<Vertex> getVertices() {
-        return vertices;
+        return new ArrayList<>(vertices.values());
     }
 
     public List<Edge> getEdges() {
         return edges;
     }
 
+    public void addEdge(int vertexVal1, int vertexVal2) {
+        Vertex v1 = getOrCreateVertex(vertexVal1);
+        Vertex v2 = getOrCreateVertex(vertexVal2);
+        Edge edge = new Edge(v1, v2);
+        edges.add(edge);
+        v1.getAdjacencyMap().put(v2, edge);
+    }
+
+    public Vertex getVertex(int id) {
+        return vertices.get(id);
+    }
+
+    private Vertex getOrCreateVertex(int id) {
+        if (!vertices.containsKey(id)) {
+            vertices.put(id, new Vertex(id));
+        }
+        return vertices.get(id);
+    }
+
     static class Vertex implements Comparable {
         private final int id;
-        private Map<Vertex, Edge> adjacencyMap;
+        private Map<Vertex, Edge> adjacencyMap; // outgoing edges for directed graph
 
         public Vertex(int id) {
             this.id = id;
@@ -83,6 +108,10 @@ public class Graph {
         private final Vertex src;
         private final Vertex dest;
         private final int weight;
+
+        public Edge(Vertex src, Vertex dest) {
+            this(src, dest, 0);
+        }
 
         public Edge(Vertex src, Vertex dest, int weight) {
             this.src = src;
