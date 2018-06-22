@@ -42,6 +42,33 @@ public class TreeProperties {
         return node;
     }
 
+    static Node mirrorOfTreeIterative(Node root) {
+        if (root == null)
+            return null;
+
+        Queue<Node> queue = new LinkedList<>();
+        queue.add(root);
+
+        while (!queue.isEmpty()) {
+
+            Node node = queue.poll();
+
+            // swap left & right child
+            Node temp = node.left;
+            node.left = node.right;
+            node.right = temp;
+
+            // enqueue left and right child
+            if (node.left != null)
+                queue.add(node.left);
+
+            if (node.right != null)
+                queue.add(node.right);
+        }
+
+        return root;
+    }
+
     static int getLeafCount(Node node) {
         if (node == null) {
             return 0;
