@@ -94,32 +94,7 @@ public class AVLTree {
         // update height of this ancestor node
         node.height = 1 + Math.max(height(node.left), height(node.right));
 
-        // get balance factor of this ancestor node
-        int balanceFactor = getBalanceFactor(node);
-
-        // if this node becomes unbalanced, there are four cases
-
-        // case 1: Left Left case
-        if (balanceFactor > 1 && data < node.left.data)
-            return rightRotate(node);
-
-        // case 2: Right Right case
-        if (balanceFactor < -1 && data > node.right.data)
-            return leftRotate(node);
-
-        // case 3: Left Right case
-        if (balanceFactor > 1 && data > node.left.data) {
-            node.left = leftRotate(node.left);
-            return rightRotate(node);
-        }
-
-        // case 4: Right Left case
-        if (balanceFactor < -1 && data < node.right.data) {
-            node.right = rightRotate(node.right);
-            return leftRotate(node);
-        }
-
-        return node;
+        return balanceTree(node);
     }
 
     Node delete(Node node, int data) {
@@ -168,6 +143,10 @@ public class AVLTree {
         // update height of this current node
         node.height = 1 + Math.max(height(node.left), height(node.right));
 
+        return balanceTree(node);
+    }
+
+    Node balanceTree(Node node) {
         // get balance factor of this node
         int balanceFactor = getBalanceFactor(node);
 
@@ -194,7 +173,6 @@ public class AVLTree {
         }
 
         return node;
-
     }
 
     int minValue(Node root) {
