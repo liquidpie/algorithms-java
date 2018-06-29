@@ -9,7 +9,8 @@ public class InOrderSuccessor {
 
     /**
      So, if we want to find X.nextNode(), we do the following:
-     1. If X has a right child, then the successor must be on the right side of X (because of the order in which we visit nodes). Specifically, the left-most child must be the first node visited in that subtree.
+     1. If X has a right child, then the successor must be on the right side of X (because of the order in which we visit nodes).
+     Specifically, the left-most child must be the first node visited in that subtree.
      2. Else, we go to X’s parent (call it P).
      2.a. If X was a left child (P.left = X), then P is the successor of X
      2.b. If X was a right child (P.right = X), then we have fully visited P, so we call nextNode(P).

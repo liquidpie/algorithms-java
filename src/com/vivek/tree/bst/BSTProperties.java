@@ -62,10 +62,10 @@ public class BSTProperties {
             nodes.add(node);
 
         if (node.data > min)
-            findAllNodesInRange(node.left, min, max, nodes);
+            findAllNodesInRange(node.left, min, node.data - 1, nodes);
 
         if (node.data < max)
-            findAllNodesInRange(node.right, min, max, nodes);
+            findAllNodesInRange(node.right, node.data + 1, max, nodes);
     }
 
     public static void main(String[] args) {

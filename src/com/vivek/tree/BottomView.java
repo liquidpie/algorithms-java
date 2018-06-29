@@ -14,7 +14,7 @@ import java.util.TreeMap;
  * If there are multiple bottom-most nodes for a horizontal distance from root,
  * then print the later one in level traversal.
  *
- * The following are steps to print Bottom View of Bianry Tree.
+ * The following are steps to print Bottom View of Binary Tree.
      1. We put tree nodes in a queue for the level order traversal.
      2. Start with the horizontal distance(hd) 0 of the root node, keep on adding left child to queue
         along with the horizontal distance as hd-1 and right child as hd+1.
