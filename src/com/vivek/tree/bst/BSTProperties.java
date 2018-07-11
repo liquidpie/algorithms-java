@@ -58,14 +58,14 @@ public class BSTProperties {
         if (node == null)
             return;
 
+        if (min < node.data)
+            findAllNodesInRange(node.left, min, max, nodes);
+
         if (node.data >= min && node.data <= max)
             nodes.add(node);
 
-        if (node.data > min)
-            findAllNodesInRange(node.left, min, node.data - 1, nodes);
-
-        if (node.data < max)
-            findAllNodesInRange(node.right, node.data + 1, max, nodes);
+        if (max > node.data)
+            findAllNodesInRange(node.right, min, max, nodes);
     }
 
     public static void main(String[] args) {
