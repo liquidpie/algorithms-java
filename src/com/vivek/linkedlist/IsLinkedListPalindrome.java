@@ -41,14 +41,14 @@ public class IsLinkedListPalindrome {
         Node slowPointer = head;
         Node fastPointer = head;
         int count = 0;
-        while (slowPointer != null) {
+        while (fastPointer != null) {
             count++;
-            slowPointer = slowPointer.next;
+            fastPointer = fastPointer.next;
             if ((count & 1) == 0) {
-                fastPointer = fastPointer.next;
+                slowPointer = slowPointer.next;
             }
         }
-        Node middle = fastPointer;
+        Node middle = slowPointer;
 
         // reverse the second half
         ReverseLinkedList reverseUtil = new ReverseLinkedList();
