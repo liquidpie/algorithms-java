@@ -7,6 +7,10 @@ import java.util.Scanner;
  */
 public class FlippingBits {
 
+    public static int flipInteger(final int n) {
+        return n ^ (~0) >> 1;
+    }
+
     public static void main(String... args) {
         try (Scanner in = new Scanner(System.in)) {
             long n = in.nextLong();
