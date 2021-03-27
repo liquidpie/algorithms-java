@@ -11,7 +11,7 @@ public class LowestSetBit {
         try (Scanner in = new Scanner(System.in)) {
             int input  = in.nextInt();
 
-            int bin = input & ~(input - 1); // all bits cleared except lowest set bit
+            int bin = input & -input; // Least Significant One-Bit: all bits cleared except lowest set bit
 
             int index = 0;
             while ((bin & 1) != 1) {

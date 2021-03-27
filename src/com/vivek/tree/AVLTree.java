@@ -39,7 +39,7 @@ public class AVLTree {
     }
 
     // utility to right rotate subtree rooted with y
-    Node rightRotate(Node z) {
+    private Node rightRotate(Node z) {
         Node y = z.left;
         Node T3 = y.right;
 
@@ -56,7 +56,7 @@ public class AVLTree {
     }
 
     // utility to left rotate subtree rooted with x
-    Node leftRotate(Node z) {
+    private Node leftRotate(Node z) {
         Node y = z.right;
         Node T2 = y.left;
 
@@ -73,13 +73,13 @@ public class AVLTree {
     }
 
     // get balance factor of Node n
-    int getBalanceFactor(Node n) {
+    private int getBalanceFactor(Node n) {
         if (n == null)
             return 0;
         return height(n.left) - height(n.right);
     }
 
-    Node insert(Node node, int data) {
+    public Node insert(Node node, int data) {
         // perform normal BST insertion
         if (node == null)
             return new Node(data);
@@ -97,7 +97,7 @@ public class AVLTree {
         return balanceTree(node);
     }
 
-    Node delete(Node node, int data) {
+    public Node delete(Node node, int data) {
         if (node == null) {
             return node;
         }
@@ -139,14 +139,13 @@ public class AVLTree {
         if (node == null)
             return node;
 
-
         // update height of this current node
         node.height = 1 + Math.max(height(node.left), height(node.right));
 
         return balanceTree(node);
     }
 
-    Node balanceTree(Node node) {
+    private Node balanceTree(Node node) {
         // get balance factor of this node
         int balanceFactor = getBalanceFactor(node);
 
@@ -175,7 +174,7 @@ public class AVLTree {
         return node;
     }
 
-    int minValue(Node root) {
+    public int minValue(Node root) {
         int min = root.data;
         while (root.left != null) {
             min = root.left.data;
@@ -184,7 +183,16 @@ public class AVLTree {
         return min;
     }
 
-    static class Node {
+    public int maxValue(Node root) {
+        int max = root.data;
+        while (root.right != null) {
+            max = root.right.data;
+            root = root.right;
+        }
+        return max;
+    }
+
+    public static class Node {
         int data, height;
         Node left, right;
 

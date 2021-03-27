@@ -53,7 +53,7 @@ public class CountFrequency {
     }
 
     public static void main(String[] args) {
-        int arr[] = {2, 3, 3, 2, 5};
+        int[] arr = {2, 3, 3, 2, 5};
         int n = arr.length;
 
         withExtraSpace(arr, n);
