@@ -17,6 +17,9 @@ public class QuickSort {
 		int pivot = arr[end];
 		int partitionIndex = start;
 
+		// each time we find an element less than or equal to the pivot,
+		// `partitionIndex` is incremented, and that element would be placed
+		// before the pivot.
 		for (int i = start; i < end - 1; i++) {
 			if (arr[i] <= pivot) {
 				int temp = arr[partitionIndex];
