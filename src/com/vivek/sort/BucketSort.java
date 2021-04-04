@@ -1,8 +1,6 @@
 package com.vivek.sort;
 
-import java.util.Arrays;
 import java.util.Collections;
-import java.util.LinkedList;
 import java.util.Vector;
 
 /**
@@ -141,6 +139,5 @@ public class BucketSort {
             System.out.print(el + " ");
         }
     }
-
 
 }

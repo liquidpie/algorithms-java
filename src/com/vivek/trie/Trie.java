@@ -11,7 +11,7 @@ public class Trie {
     private static TrieNode root = new TrieNode();
 
     // trie node
-    static class TrieNode {
+    private static class TrieNode {
 
         TrieNode[] children = new TrieNode[ALPHABET_SIZE];
 
