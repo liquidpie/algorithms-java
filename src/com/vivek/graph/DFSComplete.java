@@ -2,17 +2,14 @@ package com.vivek.graph;
 
 import java.util.*;
 
-/**
- * Created by VJaiswal on 21/06/18.
- */
 public class DFSComplete {
 
     /**
-     * DFS Complete traverses all the nodes even we have
-     * disconnection
+     * DFS Complete traverses all the nodes even we have disconnection.
+     * If an initial call to DFS fails to reach all vertices of a graph,
+     * we can restart a new call to DFS at one of those unvisited vertices.
      *
      * Complexity : O(n + m) where n is number of nodes & m is number of edges
-     * @param g
      */
     static void dfsComplete(Graph g) {
         if (g == null)
@@ -37,11 +34,12 @@ public class DFSComplete {
         if (s == null)
             return;
 
+        visited.add(s);
+
         for (Graph.Edge e : s.getAdjacentEdges()) {
             Graph.Vertex v = e.opposite(s);
 
             if (!visited.contains(v)) {
-                visited.add(v);
                 forest.put(v, e);
                 dfs(g, v, visited, forest);
             }
