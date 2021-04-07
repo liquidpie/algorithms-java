@@ -2,23 +2,14 @@ package com.vivek.graph;
 
 import java.util.*;
 
-/**
- * Created by VJaiswal on 25/04/18.
- */
-public class Graph {
+public class DirectedGraph {
 
     private final Map<Integer, Vertex> vertices;
     private final List<Edge> edges;
 
-    public Graph() {
+    public DirectedGraph() {
         this.vertices = new HashMap<>();
         this.edges = new ArrayList<>();
-    }
-
-    public Graph(List<Vertex> vertices, List<Edge> edges) {
-        this.vertices = new HashMap<>();
-        vertices.forEach(vertex -> this.vertices.put(vertex.getId(), vertex));
-        this.edges = edges;
     }
 
     public List<Vertex> getVertices() {
@@ -34,7 +25,8 @@ public class Graph {
         Vertex v2 = getOrCreateVertex(vertexVal2);
         Edge edge = new Edge(v1, v2);
         edges.add(edge);
-        v1.getAdjacencyMap().put(v2, edge);
+        v1.getAdjacencyOutMap().put(v2, edge);
+        v2.getAdjacencyInMap().put(v1, edge);
     }
 
     public Vertex getVertex(int id) {
@@ -50,29 +42,39 @@ public class Graph {
 
     static class Vertex implements Comparable<Vertex> {
         private final int id;
-        private final Map<Vertex, Edge> adjacencyMap; // outgoing edges for directed graph
+        private final Map<Vertex, Edge> adjacencyOutMap;
+        private final Map<Vertex, Edge> adjacencyInMap;
 
         public Vertex(int id) {
             this.id = id;
-            adjacencyMap = new HashMap<>();
+            adjacencyOutMap = new HashMap<>();
+            adjacencyInMap = new HashMap<>();
         }
 
         public int getId() { return id; }
 
-        public Map<Vertex, Edge> getAdjacencyMap() {
-            return adjacencyMap;
+        public Map<Vertex, Edge> getAdjacencyOutMap() {
+            return adjacencyOutMap;
         }
 
-        public Set<Vertex> getAdjacentVertices() {
-            return adjacencyMap.keySet();
+        public Map<Vertex, Edge> getAdjacencyInMap() {
+            return adjacencyInMap;
         }
 
-        public Collection<Edge> getAdjacentEdges() {
-            return adjacencyMap.values();
+        public Collection<Edge> getOutgoingEdges() {
+            return adjacencyOutMap.values();
         }
 
-        public void addAdjacentEdge(Vertex node, Edge edge) {
-            adjacencyMap.put(node, edge);
+        public Collection<Edge> getIncomingEdges() {
+            return adjacencyInMap.values();
+        }
+
+        public void addOutgoingEdge(Vertex node, Edge edge) {
+            adjacencyOutMap.put(node, edge);
+        }
+
+        public void addIncomingEdge(Vertex node, Edge edge) {
+            adjacencyInMap.put(node, edge);
         }
 
         @Override
@@ -175,8 +177,8 @@ public class Graph {
 
         @Override
         public String toString() {
-            return "Edge (" + src + ", " + dest + ", " + weight + ")";
+            return "Edge (" + src + " -> " + dest + ", " + weight + ")";
         }
     }
-
+    
 }
