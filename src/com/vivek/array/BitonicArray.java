@@ -82,10 +82,9 @@ public class BitonicArray {
     public static void main(String[] args) {
         int[] arr = { -8, 1, 2, 3, 4, 5, -2, -3 };
         int key = 5;
-        int n, l, r;
-        n = arr.length;
-        l = 0;
-        r = n - 1;
+        int n = arr.length;
+        int l = 0;
+        int r = n - 1;
         int index;
         index = findBitonicPoint(arr, n, l, r);
 
@@ -93,10 +92,8 @@ public class BitonicArray {
 
         if (x == -1) {
             System.out.println("Element Not Found");
-        }
-        else {
-            System.out.println("Element Found at index "
-                    + x);
+        } else {
+            System.out.println("Element Found at index " + x);
         }
     }
 
