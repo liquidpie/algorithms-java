@@ -9,8 +9,9 @@ public class BFS {
 
     /**
      * Complexity : O(n + m) where n is number of nodes & m is number of edges
-     * @param g
-     * @param s
+     *
+     * A path in a breadth first search tree rooted at vertex s to any other vertex v is guaranteed to be the
+     * shortest such path from s to v in terms of the number of edges.
      */
     static void bfs(Graph g, Graph.Vertex s) {
         Map<Graph.Vertex, Graph.Edge> forest = new LinkedHashMap<>();
