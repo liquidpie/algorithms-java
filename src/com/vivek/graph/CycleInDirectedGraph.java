@@ -10,17 +10,16 @@ import java.util.Set;
  */
 public class CycleInDirectedGraph {
 
-    enum Color { WHITE, GRAY, BLACK}
+    enum Color { WHITE, GRAY, BLACK }
 
     /**
      The idea is to do DFS of given graph and while doing traversal, assign one of the below three colors to every vertex.
 
-     WHITE : Vertex is not processed yet.  Initially
-     all vertices are WHITE.
+     WHITE : Vertex is not processed yet. Initially all vertices are WHITE.
 
      GRAY : Vertex is being processed (DFS for this
      vertex has started, but not finished which means
-     that all descendants (ind DFS tree) of this vertex
+     that all descendants (in the DFS tree) of this vertex
      are not processed yet (or this vertex is in function
      call stack)
 

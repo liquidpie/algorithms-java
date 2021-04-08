@@ -45,7 +45,7 @@ public class CycleInUndirectedGraph {
                 return true;
             }
         }
-        return true;
+        return false;
     }
 
     public static void main(String[] args) {
