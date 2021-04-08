@@ -1,4 +1,4 @@
-package com.vivek.array;
+package com.vivek.matrix;
 
 public class PrintMatrixInSpiralWay {
 	
