@@ -58,17 +58,22 @@ public class NQueen {
     }
 
     private boolean solveNQUtil(int[][] board, int col) {
+        // If all queens are placed then return true
         if (col >= n)
             return true;
 
+        // Consider this column and try placing this queen in all rows one by one
         for (int row = 0; row < n; row++) {
             if (isSafe(row, col, board)) {
+                // Place this queen in board[row][col]
                 board[row][col] = 1;
 
+                // recur to place rest of the queens
                 if (solveNQUtil(board, col + 1))
                     return true;
 
-                board[row][col] = 0;
+                // If placing queen in board[row][col] doesn't lead to a solution then remove queen from board[row][col]
+                board[row][col] = 0; // backtrack
             }
         }
 
