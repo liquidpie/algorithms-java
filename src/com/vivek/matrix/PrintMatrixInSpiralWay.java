@@ -2,8 +2,7 @@ package com.vivek.matrix;
 
 public class PrintMatrixInSpiralWay {
 	
-	void spiralOrder(int[][] matrix)
-	{
+	void spiralOrder(int[][] matrix) {
 	     if(matrix.length == 0)
 	         return;
 	     // Initialize four indexes
