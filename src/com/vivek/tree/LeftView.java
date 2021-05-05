@@ -3,17 +3,15 @@ package com.vivek.tree;
 public class LeftView {
 
 	Node root;
-    static int  max_level = 0;
+    static int max_level = 0;
  
     // recursive function to print left view
-    void leftViewUtil(Node node, int level)
-    {
+    void leftViewUtil(Node node, int level) {
         // Base Case
-        if (node==null) return;
+        if (node == null) return;
  
         // If this is the first node of its level
-        if (max_level < level)
-        {
+        if (max_level < level) {
             System.out.print(" " + node.data);
             max_level = level;
         }
@@ -24,14 +22,12 @@ public class LeftView {
     }
  
     // A wrapper over leftViewUtil()
-    void leftView()
-    {
+    void leftView() {
         leftViewUtil(root, 1);
     }
  
     /* testing for example nodes */
-    public static void main(String args[])
-    {
+    public static void main(String[] args) {
         /* creating a binary tree and entering the nodes */
     	LeftView tree = new LeftView();
         tree.root = new Node(12);

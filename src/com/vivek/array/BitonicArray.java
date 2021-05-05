@@ -48,7 +48,7 @@ public class BitonicArray {
         return -1;
     }
 
-    private static int findBitonicPoint(int[] arr, int n, int l, int r) {
+    private static int findBitonicPoint(int[] arr, int l, int r) {
         int mid;
         int bitonicPoint = 0;
         mid = (r + l) / 2;
@@ -56,9 +56,9 @@ public class BitonicArray {
             return mid;
         } else {
             if (arr[mid] > arr[mid - 1] && arr[mid] < arr[mid + 1]) {
-                bitonicPoint =  findBitonicPoint(arr, n, mid, r);
+                bitonicPoint =  findBitonicPoint(arr, mid, r);
             } else if (arr[mid] < arr[mid - 1] && arr[mid] > arr[mid + 1]) {
-                    bitonicPoint = findBitonicPoint(arr, n, l, mid);
+                bitonicPoint = findBitonicPoint(arr, l, mid);
             }
         }
         return bitonicPoint;
@@ -86,7 +86,7 @@ public class BitonicArray {
         int l = 0;
         int r = n - 1;
         int index;
-        index = findBitonicPoint(arr, n, l, r);
+        index = findBitonicPoint(arr, l, r);
 
         int x = searchBitonic(arr, n, key, index);
 
