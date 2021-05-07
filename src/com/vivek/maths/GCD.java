@@ -46,10 +46,30 @@ public class GCD {
         return gcdExtended(b % a, a);
     }
 
+    /**
+     * Time Complexity: O(N * log(M)), where M is the smallest element of the array
+     * Auxiliary Space: O(1)
+     *
+     * https://www.geeksforgeeks.org/gcd-two-array-numbers/
+     */
+    static int gcdArray(int[] arr) {
+        int gcd = arr[0];
+        for (int i = 1; i < arr.length; i++) {
+            gcd = gcd(gcd, arr[i]);
+
+            if (gcd == 1)
+                return 1;
+        }
+        return gcd;
+    }
+
     public static void main(String[] args) {
         int a = 98, b = 56;
         System.out.println("GCD of " + a +" and " + b + " is " + gcd(a, b));
         System.out.println("GCD of " + a +" and " + b + " is " + gcdExtended(a, b));
+
+        int[] arr = { 2, 4, 6, 8, 16 };
+        System.out.println(gcdArray(arr));
     }
 
 }
