@@ -27,6 +27,8 @@ package com.vivek.string;
  * - Recursively call for the two halves in the above steps i.e., from start to i and i + 1 to end separately and repeat the Step 2 and 3 and return the maximum of the two values reutnr by the above recursive call.
  * - If all the characters between start and end is repeated at least K times, then the answer is end – start.
  *
+ * Reference: https://www.geeksforgeeks.org/largest-substring-where-all-characters-appear-at-least-k-times-set-2/
+ *
  */
 public class LongestSubstringAtLeastKRepetition {
 
