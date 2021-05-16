@@ -71,8 +71,6 @@ public class FirstMissingPositive {
     }
 
     public static void main(String[] args) {
-//        int[] arr = {2, 3, 7, 6, 8, -1, -10, 15};
-//        int[] arr = {1, 1, 0, -1, -2};
         int[] arr = {1, 2, 0};
         System.out.println(findMissingPositive(arr));
         System.out.println(Arrays.toString(arr));
