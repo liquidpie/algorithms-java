@@ -10,7 +10,7 @@ import java.util.HashSet;
  */
 public class UnionFind<E extends Comparable<E>> {
 
-    private HashMap<GenericGraph.Vertex<E>, HashSet<GenericGraph.Vertex<E>>> membershipMap =
+    private final HashMap<GenericGraph.Vertex<E>, HashSet<GenericGraph.Vertex<E>>> membershipMap =
             new HashMap<>();
 
     public UnionFind(GenericGraph<E> graph) {
