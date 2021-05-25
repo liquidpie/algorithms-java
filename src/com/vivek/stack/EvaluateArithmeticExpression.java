@@ -60,6 +60,10 @@ Notes:
      */
     static Integer evaluateExpr(String expr) {
         String postfix = infixToPostfix(expr);
+        if (postfix == null) {
+            System.out.println("Invalid Expression");
+            return null;
+        }
         Stack<Integer> stack = new Stack<>();
         String[] tokens = postfix.split("\\s+");
         Set<String> operators = Set.of("+", "-", "*", "/");
@@ -75,6 +79,47 @@ Notes:
             }
         }
         return stack.size() == 1 ? stack.pop() : null;
+    }
+
+    static Integer evaluateExprUsingTwoStacks(String expr) {
+        char[] tokens = expr.toCharArray();
+        Stack<Integer> values = new Stack<>();
+        Stack<Character> operators = new Stack<>();
+
+        for (int i = 0; i < tokens.length; i++) {
+            if (tokens[i] == ' ')
+                continue;
+
+            if (tokens[i] >= '0' && tokens[i] <= '9') {
+                StringBuilder builder = new StringBuilder();
+                while (i < tokens.length && tokens[i] >= '0' && tokens[i] <= '9') {
+                    builder.append(tokens[i++]);
+                }
+                values.push(Integer.parseInt(builder.toString()));
+                i--;
+            } else if (tokens[i] == '(') {
+                operators.push(tokens[i]);
+            } else if (tokens[i] == ')') {
+                while (!operators.isEmpty() && operators.peek() != '(') {
+                    int result = operation(String.valueOf(operators.pop()), values.pop(), values.pop());
+                    values.push(result);
+                }
+                operators.pop();
+            } else if (tokens[i] == '+' || tokens[i] == '-' || tokens[i] == '*' || tokens[i] == '/') {
+                while (!operators.isEmpty() && comparePrecedence(tokens[i], operators.peek()) == 1) {
+                    int result = operation(String.valueOf(operators.pop()), values.pop(), values.pop());
+                    values.push(result);
+                }
+                operators.push(tokens[i]);
+            }
+        }
+
+        while (!operators.isEmpty()) {
+            int result = operation(String.valueOf(operators.pop()), values.pop(), values.pop());
+            values.push(result);
+        }
+
+        return values.pop();
     }
 
 
@@ -149,8 +194,11 @@ Notes:
             }
         }
 
-        while (!stack.isEmpty())
+        while (!stack.isEmpty()) {
+            if (stack.peek() == '(' || stack.peek() == ')')
+                return null;
             builder.append(' ').append(stack.pop());
+        }
 
         return builder.toString().trim();
     }
@@ -180,6 +228,18 @@ Notes:
     public static void main(String[] args) {
         String expr = "( 21 + 5 ) * 4";
         System.out.println(evaluateExpr(expr));
+
+//        expr = "( 21 + 5 * 4";
+//        System.out.println(evaluateExpr(expr));
+//
+//        expr = "21 + 5 ) * 4";
+//        System.out.println(evaluateExpr(expr));
+
+//        expr = "( 21 + ) 5 * 4";
+//        System.out.println(evaluateExpr(expr));
+//
+//        expr = "( 21 + ) 5 * 4";
+        System.out.println(evaluateExprUsingTwoStacks(expr));
     }
 
 }
