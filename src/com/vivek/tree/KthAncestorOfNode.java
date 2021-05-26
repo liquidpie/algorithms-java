@@ -1,6 +1,8 @@
 package com.vivek.tree;
 
+import java.util.ArrayList;
 import java.util.LinkedList;
+import java.util.List;
 import java.util.Queue;
 
 /**
@@ -12,8 +14,8 @@ import java.util.Queue;
  * Approaches:
  *
  * 1. Use Parent array to find Kth ancestor using BFS method (https://www.geeksforgeeks.org/kth-ancestor-node-binary-tree)
- * 2. Use Recursive DFS to find Kth ancestor
- *
+ * 2. Use Recursive DFS to find Kth ancestor (https://www.geeksforgeeks.org/kth-ancestor-node-binary-tree-set-2)
+ * 3. Use Root to Node path and find kth ancestor from this path (https://www.geeksforgeeks.org/k-th-ancestor-of-a-node-in-binary-tree-set-3)
  */
 public class KthAncestorOfNode {
 
@@ -106,6 +108,38 @@ public class KthAncestorOfNode {
 
     }
 
+    /**
+     * First we find the path of given key data from the root and we will store it into a vector
+     * then we simply return the kth index of the vector from the last.
+     */
+    static class UsingRootToNodePath {
+
+        static int kthAncestor(Node root, int node, int k) {
+            List<Integer> path = new ArrayList<>();
+            if (rootToNodePath(root, node, path)) {
+                return path.get(path.size() - 1 - k);
+            }
+            return -1;
+        }
+
+        private static boolean rootToNodePath(Node root, int node, List<Integer> path) {
+            if (root == null)
+                return false;
+
+            path.add(root.data);
+
+            if (root.data == node)
+                return true;
+
+            if (rootToNodePath(root.left, node, path) ||
+                rootToNodePath(root.right, node, path))
+                return true;
+
+            path.remove(path.size() - 1);
+            return false;
+        }
+    }
+
     public static void main(String[] args) {
         Node root = new Node(1);
         root.left = new Node(2);
@@ -118,6 +152,8 @@ public class KthAncestorOfNode {
         System.out.println(UsingParentArrayBFS.kthAncestor(root, 7, 5, 2));
 
         UsingRecursiveDFS.kthAncestor(root, 5, 2);
+
+        System.out.println(UsingRootToNodePath.kthAncestor(root,5, 2));
     }
 
 }
