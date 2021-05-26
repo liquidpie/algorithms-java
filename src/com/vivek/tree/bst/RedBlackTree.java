@@ -1,4 +1,4 @@
-package com.vivek.tree;
+package com.vivek.tree.bst;
 
 /**
  * Created by VJaiswal on 17/10/17.

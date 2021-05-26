@@ -1,4 +1,6 @@
-package com.vivek.tree;
+package com.vivek.tree.bst;
+
+import com.vivek.tree.Node;
 
 import java.util.ArrayList;
 import java.util.List;

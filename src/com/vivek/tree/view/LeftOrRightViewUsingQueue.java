@@ -1,4 +1,6 @@
-package com.vivek.tree;
+package com.vivek.tree.view;
+
+import com.vivek.tree.Node;
 
 import java.util.ArrayList;
 import java.util.LinkedList;

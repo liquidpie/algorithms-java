@@ -1,4 +1,4 @@
-package com.vivek.tree;
+package com.vivek.tree.view;
 
 import java.util.LinkedList;
 import java.util.Map;

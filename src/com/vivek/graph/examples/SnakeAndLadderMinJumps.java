@@ -1,4 +1,4 @@
-package com.vivek.graph;
+package com.vivek.graph.examples;
 
 import java.util.LinkedList;
 import java.util.Queue;

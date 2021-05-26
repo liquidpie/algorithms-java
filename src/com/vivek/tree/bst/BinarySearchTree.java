@@ -1,4 +1,6 @@
-package com.vivek.tree;
+package com.vivek.tree.bst;
+
+import com.vivek.tree.Node;
 
 /**
  * Created by VJaiswal on 15/10/17.
