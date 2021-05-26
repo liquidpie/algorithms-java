@@ -17,6 +17,9 @@ import java.util.List;
  *  - if root’s data = x, return true.
  *  - if node x is present in root’s left or right subtree, return true.
  *  - Else remove root’s data value from arr[] and return false.
+ *
+ *  Reference:
+ *  https://www.geeksforgeeks.org/print-path-root-given-node-binary-tree/
  */
 public class RootToNodePath {
 
