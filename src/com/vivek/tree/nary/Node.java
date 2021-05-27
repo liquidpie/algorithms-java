@@ -9,10 +9,14 @@ public class Node {
     private final List<Node> children;
     private final int n; // max number of children
 
+    public Node(int data) {
+        this(data, -1);
+    }
+
     public Node(int data, int n) {
         this.data = data;
         this.n = n;
-        this.children = new ArrayList<>(n);
+        this.children = n != -1 ? new ArrayList<>(n) : new ArrayList<>();
     }
 
     public Node(int data, List<Node> children) {
@@ -22,7 +26,7 @@ public class Node {
     }
 
     public void addChildren(Node child) {
-        if (children.size() == n) {
+        if (n != -1 && children.size() == n) {
             throw new IllegalStateException("No more child can be added");
         }
         children.add(child);
