@@ -153,6 +153,8 @@ public class Traversal {
      * (either moving down from parent vertex or returning from child vertex). We start from root and reach back to root after visiting all vertices.
      *
      * It requires exactly 2*N-1 vertices to store Euler tour.
+     *
+     * https://www.geeksforgeeks.org/euler-tour-binary-tree
      */
     static void eulerTour(Node root, List<Integer> eulerTour) {
         if (root == null)
