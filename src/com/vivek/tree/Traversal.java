@@ -143,4 +143,46 @@ public class Traversal {
         }
     }
 
+    /**
+     * Euler tour of Binary Tree
+     *
+     * Given a binary tree where each node can have at most two child nodes, the task is to find the Euler tour of the binary tree.
+     * Euler tour is represented by a pointer to the topmost node in the tree. If the tree is empty, then value of root is NULL.
+     *
+     * Euler tour is defined as a way of traversing tree such that each vertex is added to the tour when we visit it
+     * (either moving down from parent vertex or returning from child vertex). We start from root and reach back to root after visiting all vertices.
+     *
+     * It requires exactly 2*N-1 vertices to store Euler tour.
+     */
+    static void eulerTour(Node root, List<Integer> eulerTour) {
+        if (root == null)
+            return;
+
+        eulerTour.add(root.data);
+
+        if (root.left != null) {
+            eulerTour(root.left, eulerTour);
+            eulerTour.add(root.data);
+        }
+        if (root.right != null) {
+            eulerTour(root.right, eulerTour);
+            eulerTour.add(root.data);
+        }
+    }
+
+    public static void main(String[] args) {
+        Node root = new Node(1);
+        root.left = new Node(2);
+        root.right = new Node(3);
+        root.left.left = new Node(4);
+        root.left.right = new Node(5);
+        root.right.left = new Node(6);
+        root.right.right = new Node(7);
+
+        List<Integer> tour = new ArrayList<>();
+        eulerTour(root, tour);
+        System.out.println(tour);
+
+    }
+
 }
