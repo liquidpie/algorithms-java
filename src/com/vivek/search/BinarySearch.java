@@ -4,6 +4,8 @@ public class BinarySearch {
 
     /**
      * Returns index of key if it is present in arr[low..high], else return -1
+     *
+     * Requires O(1) space
      */
     public static int iterative(int[] arr, int low, int high, int key) {
         while (low < high) {
@@ -20,6 +22,8 @@ public class BinarySearch {
 
     /**
      * Returns index of key if it is present in arr[low..high], else return -1
+     *
+     * Requires O(Log n) space
      */
     public static int recursive(int[] arr, int low, int high, int key) {
         if (low < high) {
