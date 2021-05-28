@@ -30,9 +30,13 @@ public class Graph {
     }
 
     public void addEdge(int vertexVal1, int vertexVal2) {
+        addEdge(vertexVal1, vertexVal2, 0);
+    }
+
+    public void addEdge(int vertexVal1, int vertexVal2, int weight) {
         Vertex v1 = getOrCreateVertex(vertexVal1);
         Vertex v2 = getOrCreateVertex(vertexVal2);
-        Edge edge = new Edge(v1, v2);
+        Edge edge = new Edge(v1, v2, weight);
         edges.add(edge);
         v1.getAdjacencyMap().put(v2, edge);
     }
@@ -48,7 +52,7 @@ public class Graph {
         return vertices.get(id);
     }
 
-    static class Vertex implements Comparable<Vertex> {
+    public static class Vertex implements Comparable<Vertex> {
         private final int id;
         private final Map<Vertex, Edge> adjacencyMap; // outgoing edges for directed graph
 
@@ -103,7 +107,7 @@ public class Graph {
 
     }
 
-    static class Edge implements Comparable<Edge> {
+    public static class Edge implements Comparable<Edge> {
         private final Vertex src;
         private final Vertex dest;
         private final int weight;
