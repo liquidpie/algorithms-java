@@ -8,7 +8,7 @@ public class BinarySearch {
      * Requires O(1) space
      */
     public static int iterative(int[] arr, int low, int high, int key) {
-        while (low < high) {
+        while (low <= high) {
             int mid = (low + high) / 2;
             if (arr[mid] == key)
                 return mid;
@@ -26,7 +26,7 @@ public class BinarySearch {
      * Requires O(Log n) space
      */
     public static int recursive(int[] arr, int low, int high, int key) {
-        if (low < high) {
+        if (low <= high) {
             int mid = (low + high) / 2;
             if (arr[mid] == key)
                 return mid;
