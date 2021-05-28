@@ -14,8 +14,7 @@ import java.util.Scanner;
  */
 public class SumTriplet {
 
-	public static void main (String[] args) throws Exception
-	{
+	public static void main (String[] args) throws Exception {
 		
 		try (Scanner in = new Scanner(System.in)) {
 			int n = in.nextInt();
