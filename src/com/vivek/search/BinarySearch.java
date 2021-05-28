@@ -18,6 +18,9 @@ public class BinarySearch {
         return -1;
     }
 
+    /**
+     * Returns index of key if it is present in arr[low..high], else return -1
+     */
     public static int recursive(int[] arr, int low, int high, int key) {
         if (low < high) {
             int mid = (low + high) / 2;
