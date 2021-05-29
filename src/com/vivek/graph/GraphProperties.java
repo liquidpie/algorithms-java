@@ -65,6 +65,21 @@ public class GraphProperties {
         return visited.size() == g.getVertices().size();
     }
 
+    /**
+     * Transpose of a directed graph G is another directed graph on the same set of vertices
+     * with all of the edges reversed compared to the orientation of the corresponding edges in G.
+     * That is, if G contains an edge (u, v) then the converse/transpose/reverse of G contains an edge (v, u) and vice versa.
+     */
+    static DirectedGraph transpose(DirectedGraph g) {
+        DirectedGraph transpose = new DirectedGraph();
+        for (DirectedGraph.Vertex u : g.getVertices()) {
+            for (DirectedGraph.Vertex v : u.getAdjacencyOutMap().keySet()) {
+                transpose.addEdge(v.getId(), u.getId());
+            }
+        }
+        return transpose;
+    }
+
     public static void main(String[] args) {
         Graph graph = new Graph();
         graph.addEdge(1, 2);
