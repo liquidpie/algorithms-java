@@ -45,6 +45,7 @@ public class BuildTreeFromInorderPreorder {
             return null;
         }
         Node node = new Node(preorder[pIndex++]);
+
         if (inStart == inEnd)
             return node;
 
@@ -61,7 +62,7 @@ public class BuildTreeFromInorderPreorder {
         int i;
         for (i = start; i <= end; i++) {
             if (inorder[i] == k)
-                return i;
+                break;
         }
         return i;
     }
