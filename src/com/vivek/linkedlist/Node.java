@@ -26,4 +26,15 @@ public class Node {
 		}
 	}
 
+	/**
+	 * Given a pointer to a node to be deleted, delete the node. Note that we don’t have a pointer to the head node.
+	 * @param node node to be deleted
+	 */
+	static void deleteNode(Node node) {
+		Node temp = node.next;
+		node.data = temp.data;
+		node.next = temp.next;
+		temp = null;
+	}
+
 }
