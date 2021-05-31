@@ -37,4 +37,8 @@ public class Node {
 		temp = null;
 	}
 
+	@Override
+	public String toString() {
+		return "Node=" + data;
+	}
 }
