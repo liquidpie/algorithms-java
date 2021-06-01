@@ -15,4 +15,8 @@ public class Node {
         this.priority = random.nextInt(100);
     }
 
+    @Override
+    public String toString() {
+        return "(key=" + key + ", priority=" + priority + ')';
+    }
 }
