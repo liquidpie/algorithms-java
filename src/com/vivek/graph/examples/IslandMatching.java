@@ -1,7 +1,5 @@
 package com.vivek.graph.examples;
 
-import java.awt.*;
-import java.util.Collections;
 import java.util.HashSet;
 import java.util.Set;
 
@@ -59,13 +57,13 @@ public class IslandMatching {
     }
 
     private void dfs(int[][] grid, int row, int col, boolean[][] visited, Set<String> islandStr) {
-        int[] rowNbr = {-1, -1, -1, 0, 0, 1, 1, 1};
-        int[] colNbr = {-1, 0, 1, -1, 1, -1, 0, 1};
+        int[] rowNbr = {-1, 1,  0, 0};
+        int[] colNbr = { 0, 0, -1, 1};
 
         visited[row][col] = true;
         islandStr.add(row + "-" + col);
 
-        for (int k = 0; k < 8; k++) {
+        for (int k = 0; k < 4; k++) {
             if (isSafe(grid, row + rowNbr[k], col + colNbr[k], visited)) {
                 dfs(grid, row + rowNbr[k], col + colNbr[k], visited, islandStr);
             }
