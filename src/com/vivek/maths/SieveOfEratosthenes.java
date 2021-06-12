@@ -1,5 +1,7 @@
 package com.vivek.maths;
 
+import java.util.Arrays;
+
 /**
  * Given a number n, print all primes smaller than or equal to n. It is also given that n is a small number.
  *
@@ -29,26 +31,28 @@ package com.vivek.maths;
  */
 public class SieveOfEratosthenes {
 
-    static void printPrimes(int n) {
+    static boolean[] getPrimes(int n) {
         boolean[] prime = new boolean[n + 1];
+        Arrays.fill(prime, true);
 
         for (int p = 2; p * p <= n; p++) {
             // If prime[p] is not changed, then it is a prime
-            if (!prime[p]) {
+            if (prime[p]) {
                 // Update all multiples of p
                 for (int i = p * p; i <= n; i += p)
-                    prime[i] = true;
+                    prime[i] = false;
             }
         }
-
-        for (int p = 2; p <= n; p++) {
-            if (!prime[p])
-                System.out.print(p + " ");
-        }
+        return prime;
     }
 
     public static void main(String[] args) {
-        printPrimes(50);
+        int n = 50;
+        boolean[] prime = getPrimes(n);
+        for (int p = 2; p <= n; p++) {
+            if (prime[p])
+                System.out.print(p + " ");
+        }
     }
 
 }
