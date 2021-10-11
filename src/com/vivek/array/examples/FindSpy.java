@@ -11,10 +11,11 @@ package com.vivek.array.examples;
  * Output: Return who's Spy else return -1
  *
  * Example:
- * N = 3, trust = [[1, 3], [2, 3]
+ * N = 3, trust = [[1, 3], [2, 3]]
  * Result: 3
  *
  * N = 3, trust = [[1, 3], [2, 3], [3, 1]]
+ * Result = -1
  */
 public class FindSpy {
 
