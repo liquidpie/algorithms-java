@@ -30,21 +30,34 @@ public class BSTProperties {
     }
 
     /**
-     * returns the second largest element in BST
+     * Returns the second largest element in BST
+     *
+     * The second largest element is second last element in inorder traversal and second element in reverse inorder traversal.
+     *
+     * We traverse given Binary Search Tree in reverse inorder and keep track of counts of nodes visited. Once the count becomes 2, we print the node.
      */
-    static int secondLargest(Node node) {
-        if (node == null)
-            return -1;
+    static int count = 0;
 
-        while (node.right != null) {
-            node = node.right;
+    static void secondLargest(Node node) {
+        if (node == null || count >= 2)
+            return;
+
+        // Follow reverse inorder traversal so that the
+        // largest element is visited first
+        secondLargest(node.right);
+
+        count++;
+
+        if (count == 2) {
+            System.out.println(node.data);
+            return;
         }
 
-        return node.data;
+        secondLargest(node.left);
     }
 
     /**
-     * Returns node with keys falling in given range
+     * Returns nodes with keys falling in given range
      */
     List<Node> findAllNodesInRange(Node root, int min, int max) {
         List<Node> nodes = new ArrayList<>();
@@ -58,13 +71,13 @@ public class BSTProperties {
         if (node == null)
             return;
 
-        if (min < node.data)
+        if (node.data < min)
             findAllNodesInRange(node.left, min, max, nodes);
 
         if (node.data >= min && node.data <= max)
             nodes.add(node);
 
-        if (max > node.data)
+        if (node.data < max)
             findAllNodesInRange(node.right, min, max, nodes);
     }
 
