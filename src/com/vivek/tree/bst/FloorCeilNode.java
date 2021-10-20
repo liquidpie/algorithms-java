@@ -7,6 +7,9 @@ import com.vivek.tree.Node;
  */
 public class FloorCeilNode {
 
+    /**
+     * Node with greatest value smaller than or equal to the key provided
+     */
     static int floor(Node node, int key) {
         if (node == null)
             return -1;
@@ -23,6 +26,9 @@ public class FloorCeilNode {
         return floor <= key ? floor : node.data;
     }
 
+    /**
+     * Node with smallest value larger than or equal to the key provided
+     */
     static int ceil(Node node, int key) {
 
         if (node == null)
