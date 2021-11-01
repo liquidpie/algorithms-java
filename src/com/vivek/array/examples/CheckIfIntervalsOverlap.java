@@ -18,7 +18,7 @@ import java.util.Arrays;
  *
  * Approach 1: Using Sorting (Time Complexity O(nLogn))
  *
- * Approach 2: Using Counter
+ * Approach 2: Using Prefix Sum
  * 1. Find the overall maximum element. Let it be max_ele
  * 2. Initialize an array of size max_ele with 0.
  * 3. For every interval [start, end], increment the value at index start, i.e. arr[start]++ and decrement the value at index (end + 1), i.e. arr[end + 1]- -.
@@ -47,7 +47,7 @@ public class CheckIfIntervalsOverlap {
         return false;
     }
 
-    static boolean usingCounter(int[][] arr) {
+    static boolean usingPrefixSum(int[][] arr) {
         if (arr == null || arr.length == 1)
             return false;
 
