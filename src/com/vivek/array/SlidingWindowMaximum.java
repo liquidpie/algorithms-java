@@ -1,6 +1,6 @@
 package com.vivek.array;
 
-import com.vivek.tree.AVLTree;
+import com.vivek.tree.bst.AVLTree;
 
 import java.util.Deque;
 import java.util.LinkedList;
