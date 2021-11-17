@@ -1,9 +1,6 @@
 package com.vivek.tree;
 
-import java.util.ArrayList;
-import java.util.LinkedList;
-import java.util.List;
-import java.util.Queue;
+import java.util.*;
 
 public class Traversal {
 
@@ -36,8 +33,41 @@ public class Traversal {
 	    System.out.print(root.data + " ");
 	    inOrder(root.right);
 	}
-	
-	
+
+    /**
+     * 1) Create an empty stack S.
+     * 2) Initialize current node as root
+     * 3) Push the current node to S and set current = current->left until current is NULL
+     * 4) If current is NULL and stack is not empty then
+     *      a) Pop the top item from stack.
+     *      b) Print the popped item, set current = popped_item->right
+     *      c) Go to step 3.
+     * 5) If current is NULL and stack is empty then we are done.
+     *
+     * https://www.geeksforgeeks.org/inorder-tree-traversal-without-recursion
+     */
+	public void inOrderIterative(Node root) {
+        if (root == null)
+            return;
+        Stack<Node> stack = new Stack<>();
+        Node current = root;
+        while (current != null || !stack.isEmpty()) {
+            // Reach the left most Node of the current Node
+            while (current != null) {
+                stack.push(current);
+                current = current.left;
+            }
+
+            // current must be null at this time
+            current = stack.pop();
+
+            System.out.print(current.data + " ");
+
+            // we have visited the node and its left subtree.  Now, it's right subtree's turn
+            current = current.right;
+        }
+    }
+
 	/* Level Order using Function */
 	void LevelOrder(Node root)
     {
