@@ -5,13 +5,25 @@ package com.vivek.trie;
  */
 public class Trie {
 
+    public enum CHAR_CASE {LOWERCASE, UPPERCASE}
+
     // Alphabet Size - Number of symbols
     private static final int ALPHABET_SIZE = 26;
 
-    private static TrieNode root = new TrieNode();
+    private final TrieNode root = new TrieNode();
+
+    private final char base;
+
+    public Trie() {
+        this.base = 'a';
+    }
+
+    public Trie(CHAR_CASE char_case) {
+        this.base = char_case == CHAR_CASE.UPPERCASE ? 'A' : 'a';
+    }
 
     // trie node
-    private static class TrieNode {
+    public static class TrieNode {
 
         TrieNode[] children = new TrieNode[ALPHABET_SIZE];
 
@@ -24,9 +36,21 @@ public class Trie {
                 children[i] = null;
             }
         }
+
+        public TrieNode getChild(int i) {
+            return children[i];
+        }
+
+        public boolean isEndOfWord() {
+            return isEndOfWord;
+        }
     }
 
-    void insert(String key) {
+    public TrieNode getRoot() {
+        return root;
+    }
+
+    public void insert(String key) {
 
         int level;
         int length = key.length();
@@ -35,7 +59,7 @@ public class Trie {
         TrieNode node = root;
 
         for (level = 0; level < length; level++) {
-            index = key.charAt(level) - 'a';
+            index = key.charAt(level) - base;
             if (node.children[index] == null) {
                 node.children[index] = new TrieNode();
             }
@@ -46,7 +70,7 @@ public class Trie {
         node.isEndOfWord = true;
     }
 
-    boolean search(String key) {
+    public boolean search(String key) {
 
         int level;
         int length = key.length();
