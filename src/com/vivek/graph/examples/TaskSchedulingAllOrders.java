@@ -20,6 +20,12 @@ import java.util.*;
  * At any stage, if we have more than one source available and since we can choose any source, therefore, in this
  * case, we will have multiple orderings of the tasks. We can use a recursive approach with <Backtracking> to
  * consider all sources at any step.
+ *
+ * Time and Space Complexity:
+ * If we don’t have any prerequisites, all combinations of the tasks can represent a topological ordering. As we
+ * know, that there can be N! combinations for ‘N’ numbers, therefore the time and space complexity of our
+ * algorithm will be O(V ! ∗ E) where ‘V’ is the total number of tasks and ‘E’ is the total prerequisites. We need
+ * the ‘E’ part because in each recursive call, at max, we remove (and add back) all the edges.
  */
 public class TaskSchedulingAllOrders {
 
