@@ -59,7 +59,7 @@ public class TaskSchedulingAllOrders {
     private static void printAllTopoOrders(Map<Integer, List<Integer>> graph, Map<Integer, Integer> inDegree,
                                            Queue<Integer> sources, List<Integer> sortedOrder) {
         if (!sources.isEmpty()) {
-            for (int s : sources) {
+            for (Integer s : sources) {
                 sortedOrder.add(s);
                 Queue<Integer> sourcesForNextCall = new LinkedList<>(sources);
                 // only remove the current source, all other sources should remain in the queue for the next call
