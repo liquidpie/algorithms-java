@@ -23,7 +23,7 @@ import java.util.*;
  */
 public class TopologicalSortBFS {
 
-    static List<Integer> topoSort(int v, int[][] edges) {
+    public static List<Integer> topoSort(int v, int[][] edges) {
         List<Integer> topoOrder = new ArrayList<>();
 
         // Initialize and Build graph
