@@ -114,8 +114,7 @@ public class Traversal {
 		    b) Enqueue temp_node�s children (first left then right children) to q
 		    c) Dequeue a node from q and assign it�s value to temp_node
      */
-    public void printLevelOrder(Node root)
-    {
+    public void printLevelOrder(Node root) {
         Queue<Node> queue = new LinkedList<>();
         queue.add(root);
         while (!queue.isEmpty()) 
@@ -137,6 +136,30 @@ public class Traversal {
                 queue.add(tempNode.right);
             }
         }
+    }
+
+    public static void reverseLevelOrder(Node root) {
+        List<List<Integer>> result = new ArrayList<>();
+        Queue<Node> queue = new LinkedList<>();
+        queue.add(root);
+
+        while (!queue.isEmpty()) {
+            int levelSize = queue.size();
+            List<Integer> currentLevel = new ArrayList<>();
+            for (int i = 0; i < levelSize; i++) {
+                Node currentNode = queue.poll();
+                currentLevel.add(currentNode.data);
+                if (currentNode.left != null) {
+                    queue.add(currentNode.left);
+                }
+                if (currentNode.right != null) {
+                    queue.add(currentNode.right);
+                }
+            }
+            result.add(0, currentLevel);
+        }
+
+        System.out.println(result);
     }
 
     /**
