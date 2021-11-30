@@ -1,4 +1,4 @@
-package com.vivek.array;
+package com.vivek.deque;
 
 import com.vivek.tree.bst.AVLTree;
 
