@@ -1,4 +1,4 @@
-package com.vivek.array.examples;
+package com.vivek.array.pattern.leftright;
 
 /**
  * Consider a devotee wishing to give offerings to temples along with a mountain range.
