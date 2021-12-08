@@ -75,8 +75,14 @@ import java.util.Arrays;
  *     Find the middle elements of both the arrays. i.e element at (n – 1)/2 and (m – 1)/2 of first and second array respectively. Compare both the elements.
  *     If the middle element of the smaller array is less than the middle element of the larger array then the first half of smaller array is bound to lie strictly in the first half of the merged array. It can also be stated that there is an element in the first half of the larger array and second half of the smaller array which is the median. So, reduce the search space to the first half of the larger array and second half of the smaller array.
  *     Similarly, If the middle element of the smaller array is greater than the middle element of the larger array then reduce the search space to the first half of the smaller array and second half of the larger array.
+ *
+ * Reference:
+ * https://redquark.org/leetcode/0004-median-of-two-sorted-arrays/
+ * https://medium.com/@hazemu/finding-the-median-of-2-sorted-arrays-in-logarithmic-time-1d3f2ecbeb46
  */
 public class MedianTwoArraysDifferentSizes {
+
+    // ToDo: this solution doesn't work for the given input. check references to update the code
 
     static double getMedianDifferentSizeArray(int[] arr1, int[] arr2) {
         return arr1.length < arr2.length
@@ -128,13 +134,20 @@ public class MedianTwoArraysDifferentSizes {
 
         int idxA = (m - 1) / 2;
         int idxB = (n - 1) / 2;
+        int[] firstArr, secondArr;
 
         // if A[idxA] <= B[idxB], then median must exist in A[idxA....] and B[....idxB]
-        if (arr1[idxA] <= arr2[idxB])
-            return findMedian(Arrays.copyOfRange(arr1, idxA, m), arr2, m / 2 + 1, n - idxA);
+        if (arr1[idxA] <= arr2[idxB]) {
+            firstArr = Arrays.copyOfRange(arr1, idxA, m);
+            secondArr = Arrays.copyOfRange(arr2, 0, idxB + 1);
+            return findMedian(firstArr, secondArr, firstArr.length, secondArr.length);
+        }
+
 
         // if A[idxA] > B[idxB], then median must exist in A[...idxA] and B[idxB....]
-        return findMedian(arr1, Arrays.copyOfRange(arr2, idxB, n), m / 2 + 1, n - idxA);
+        firstArr = Arrays.copyOfRange(arr1, 0, idxA + 1);
+        secondArr = Arrays.copyOfRange(arr2, idxB, n);
+        return findMedian(firstArr, secondArr, firstArr.length, secondArr.length);
     }
 
     private static double medianOfTwo(int a, int b) {
@@ -143,7 +156,7 @@ public class MedianTwoArraysDifferentSizes {
 
     private static double medianOfThree(int a, int b, int c) {
         int max = Math.max(a, Math.max(b, c));
-        int min = Math.min(a, Math.max(b, c));
+        int min = Math.min(a, Math.min(b, c));
         return a + b + c - max - min;
     }
 
@@ -164,8 +177,10 @@ public class MedianTwoArraysDifferentSizes {
     }
 
     public static void main(String[] args) {
-        int[] arr1 = { 1, 2, 3, 4, 5, 6, 7, 8, 9, 10 };
-        int[] arr2 = { 11, 12, 13, 14, 15, 16, 17, 18, 19 };
+//        int[] arr1 = { 1, 2, 3, 4, 5, 6, 7, 8, 9, 10 };
+//        int[] arr2 = { 11, 12, 13, 14, 15, 16, 17, 18, 19 };
+        int[] arr1 = { 1,5,6 };
+        int[] arr2 = { 2,3,4,7,8 };
 
         System.out.println(getMedianDifferentSizeArray(arr1, arr2));
     }

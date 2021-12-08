@@ -41,8 +41,7 @@ public class LowestCommonAncestor {
         return (left_lca != null) ? left_lca : right_lca;
 	}
 	
-	public static void main(String args[])
-    {
+	public static void main(String[] args) {
 		LowestCommonAncestor tree = new LowestCommonAncestor();
         tree.root = new Node(1);
         tree.root.left = new Node(2);
