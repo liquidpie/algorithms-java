@@ -5,6 +5,9 @@ import java.util.Iterator;
 import java.util.List;
 import java.util.NoSuchElementException;
 
+/**
+ * Implement an iterator which iterates on even indexes
+ */
 public class EvenList<T> implements Iterable<T> {
 
     private final List<T> list;

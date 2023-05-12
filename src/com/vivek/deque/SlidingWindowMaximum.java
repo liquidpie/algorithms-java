@@ -2,8 +2,10 @@ package com.vivek.deque;
 
 import com.vivek.tree.bst.AVLTree;
 
+import java.util.Collections;
 import java.util.Deque;
 import java.util.LinkedList;
+import java.util.PriorityQueue;
 
 /**
  * Given an array and an integer K, find the maximum for each and every contiguous subarray of size k.
@@ -65,13 +67,35 @@ public class SlidingWindowMaximum {
      - Pick first k elements and create a max heap of size k.
      - Perform heapify and print the root element.
      - Store the next and last element from the array
-     - Run a loop from k – 1 to n
-        - Replace the value of element which is got out of the window with new element which came inside the window.
-        - Perform heapify.
-        - Print the root of the Heap.
+     - Iterate over the remaining N – K elements of the array.
+            - If the top element of the max_heap is equal to the element that just went out of the window (i.e., arr[i-1]),
+              pop the top element from the max_heap.
+            - Push the next element of the array onto the max_heap.
+            - Output the maximum element in the current window (which is the root element of the max_heap).
      */
     static void maxHeapBased(int[] arr, int k) {
-        // ToDo
+        int n = arr.length;
+        PriorityQueue<Integer> pq = new PriorityQueue<>(Collections.reverseOrder());
+
+        for (int i = 0; i < k; i++) {
+            pq.offer(arr[i]);
+        }
+        // output the maximum element in the first window
+        System.out.print(pq.peek() + " ");
+
+        for (int i = 1; i <= n - k; i++) {
+
+            // remove the first element of the max-heap if it is outside of the current window
+            if (pq.peek() == arr[i - 1]) {
+                pq.poll();
+            }
+
+            // add the next element of the array to the max-heap
+            pq.offer(arr[i + k - 1]);
+
+            // output the maximum element in the current window
+            System.out.print(pq.peek() + " ");
+        }
     }
 
     /**
@@ -120,8 +144,9 @@ public class SlidingWindowMaximum {
         int[] arr = { 12, 1, 78, 90, 57, 89, 56 };
         int k = 3;
 
-        dequeBased(arr, k);
-        selfBalancingBstBased(arr, k);
+//        dequeBased(arr, k);
+//        selfBalancingBstBased(arr, k);
+        maxHeapBased(arr, k);
     }
 
 }
