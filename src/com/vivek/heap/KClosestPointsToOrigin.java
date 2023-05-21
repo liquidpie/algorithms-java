@@ -7,7 +7,7 @@ import java.util.PriorityQueue;
 /**
  * 'K' Closest Points to the Origin (easy)
  *
- * Given an array of points in the a 2D plane, find ‘K’ closest points to the origin.
+ * Given an array of points in a 2D plane, find ‘K’ closest points to the origin.
  *
  * Example 1:
  * Input: points = [[1,2],[1,3]], K = 1
@@ -22,6 +22,11 @@ import java.util.PriorityQueue;
  *
  * The Euclidean distance of a point P(x,y) from the origin can be calculated through the following formula:
  * √x2 + y2
+ *
+ * * Time Complexity: O(nlgk) given n is the number of points
+ * * Space Complexity: O(k)
+ *
+ * https://leetcode.com/problems/k-closest-points-to-origin/
  */
 public class KClosestPointsToOrigin {
 

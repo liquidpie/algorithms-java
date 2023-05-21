@@ -24,6 +24,7 @@ public class Node {
 			delimiter = " -> ";
 			node = node.next;
 		}
+		System.out.println();
 	}
 
 	@Override
