@@ -1,4 +1,4 @@
-package com.vivek.hashing;
+package com.vivek.hashtable;
 
 import java.util.HashMap;
 import java.util.List;
