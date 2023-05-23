@@ -75,6 +75,12 @@ public class BuildTreeFromInorderPreorder {
             this.data = data;
         }
 
+        public Node(char data, Node left, Node right) {
+            this.data = data;
+            this.left = left;
+            this.right = right;
+        }
+
         static void postOrder(Node root) {
             if (root == null) {
                 return;
@@ -83,6 +89,23 @@ public class BuildTreeFromInorderPreorder {
             postOrder(root.right);
             System.out.print(root.data + " ");
         }
+    }
+
+    // Without static index
+    private Node buildTree(char[] preorder, char[] inorder, int pre, int l, int r) {
+        if (r < l) return null;
+        // in and pre are the indexes of root on inorder and preorder.
+        int in;
+        char val = preorder[pre];
+        for(in = l; in <= r; in++)
+            if (inorder[in] == val) break; // seek position of in
+
+        // left subtree root is next preorder head, take left chunk of inorder
+        // right subtree root in preorder is after left subtree size, take right chunk of inorder
+        return new Node(val,
+                buildTree(preorder, inorder, pre + 1, l, in - 1),
+                buildTree(preorder, inorder, pre + 1 + in - l, in + 1, r)
+        );
     }
 
     public static void main(String[] args) {
