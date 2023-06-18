@@ -84,8 +84,13 @@ public class RotatedArraySearch {
         a) If key to be searched lies in range from arr[mid+1]
             to arr[r], recur for arr[mid+1..r].
         b) Else recur for arr[l..mid]
+
+     Note: Not working for all cases
      */
     static int improvedSearch(int[] arr, int l, int h, int key) {
+
+        if (l > h)
+            return -1;
 
         int mid = (l + h) / 2;
 
@@ -107,16 +112,48 @@ public class RotatedArraySearch {
         return improvedSearch(arr, l, mid - 1, key);
     }
 
+    /**
+     * Improved Search iteratively
+     */
+    static int improvedSearch(int[] arr, int key) {
+        int l = 0;
+        int h = arr.length - 1;
+
+        while (l <= h) {
+            int mid = (l + h) / 2;
+
+            // search for key at mid first
+            if (arr[mid] == key)
+                return mid;
+            // if the starting index of the search space has smaller element than current element
+            else if (arr[l] <= arr[mid]) {
+                if (key >= arr[l] && key < arr[mid])
+                    h = mid - 1;
+                else
+                    l = mid + 1;
+            } else {
+                if (key > arr[mid] && key <= arr[h])
+                    l = mid + 1;
+                else
+                    h = mid - 1;
+            }
+        }
+
+        return -1;
+    }
 
     // main function
     public static void main(String args[]) {
         // Let us search 3 in below array
-        int arr[] = {5, 6, 7, 8, 9, 10, 1, 2, 3};
+//        int arr[] = {5, 6, 7, 8, 9, 10, 1, 2, 3};
+        int arr[] = {3,1};
         int n = arr.length;
-        int key = 3;
+//        int key = 3;
+        int key = 1;
         System.out.println("(PivotedBinarySearch) Index of the element is : " + pivotedBinarySearch(arr, n, key));
 
         System.out.println("(ImprovedSearch) Index of the element is : " + improvedSearch(arr, 0, n - 1, key));
+        System.out.println("(ImprovedSearch Iteratively) Index of the element is : " + improvedSearch(arr, key));
 
     }
 
