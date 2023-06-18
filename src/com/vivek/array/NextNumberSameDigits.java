@@ -51,13 +51,13 @@ public class NextNumberSameDigits {
         int x = arr[i - 1];
         int smallest = i;
         for (int j = i; j < n; j++) {
-            if (arr[j] > x && arr[j] < smallest) {
-                smallest = arr[j];
+            if (arr[j] > x && arr[j] < arr[smallest]) {
+                smallest = j;
             }
         }
 
         // swap digits at i and smallest indices
-        swap(arr, i, smallest);
+        swap(arr, i - 1, smallest);
 
         // sort numbers from index i to last digit
         Arrays.sort(arr, i, n);
