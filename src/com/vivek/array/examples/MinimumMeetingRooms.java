@@ -13,12 +13,15 @@ import java.util.PriorityQueue;
  *
  * Approach 2: Using Priority Queue
  *
- * Instead of manually iterating on every room that’s been allocated and checking if the room is available or not, we can keep all the rooms in a min heap where the key for the min heap would be the ending time of meeting.
- * So, every time we want to check if any room is free or not, simply check the topmost element of the min heap as that would be the room that would get free the earliest out of all the other rooms currently occupied.
+ * Instead of manually iterating on every room that’s been allocated and checking if the room is available or not,
+ * we can keep all the rooms in a min heap where the key for the min heap would be the ending time of meeting.
+ * So, every time we want to check if any room is free or not, simply check the topmost element of the min heap as
+ * that would be the room that would get free the earliest out of all the other rooms currently occupied.
  * If the room we extracted from the top of the min heap isn’t free, then no other room is. So, we can save time here and simply allocate a new room.
  *
  *  1. Sort the given meetings by their start time.
- *  2. Initialize a new min-heap and add the first meeting’s ending time to the heap. We simply need to keep track of the ending times as that tells us when a meeting room will get free.
+ *  2. Initialize a new min-heap and add the first meeting’s ending time to the heap. We simply need to keep
+ *  track of the ending times as that tells us when a meeting room will get free.
  *  3. For every meeting room check if the minimum element of the heap i.e. the room at the top of the heap is free or not.
  *  4. If the room is free, then we extract the topmost element and add it back with the ending time of the current meeting we are processing.
  *  5. If not, then we allocate a new room and add it to the heap.
