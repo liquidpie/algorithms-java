@@ -1,4 +1,4 @@
-package com.vivek.array;
+package com.vivek.array.pattern.path;
 
 /**
  * Maximum Sum Path in Two Arrays

@@ -34,7 +34,7 @@ import java.util.Scanner;
  *
  */
 
-public class KadanesAlgo {
+public class MaxSumSubarrayKadanesAlgo {
 	
 	public static void main(String... args) {
 		
@@ -54,14 +54,15 @@ public class KadanesAlgo {
 	private static int maxSumSubArray(List<Integer> arr) {
 		
 		int maxEndingHere = 0;
-		int maxSoFar = 0;
-		
-		for (int i = 0; i < arr.size(); i++) {
-			maxEndingHere += arr.get(i);
+		int maxSoFar = Integer.MIN_VALUE;
+
+		for (Integer num : arr) {
 			if (maxEndingHere < 0) {
 				maxEndingHere = 0;
 			}
-			
+
+			maxEndingHere += num;
+
 			if (maxSoFar < maxEndingHere) {
 				maxSoFar = maxEndingHere;
 			}
