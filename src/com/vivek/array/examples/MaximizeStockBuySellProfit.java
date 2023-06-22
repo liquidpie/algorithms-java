@@ -60,6 +60,28 @@ public class MaximizeStockBuySellProfit {
         return new Tuple<>(globalSell - globalProfit, globalSell);
     }
 
+    /**
+     * https://leetcode.com/problems/best-time-to-buy-and-sell-stock
+     */
+    static int findMaxBuySellProfit(int[] prices) {
+        if (prices == null || prices.length == 0)
+            return 0;
+
+        int buy = prices[0];
+        int maxProfit = 0;
+        for (int i = 1; i < prices.length; i++) {
+            int profit = prices[i] - buy;
+
+            if (profit > maxProfit)
+                maxProfit = profit;
+
+            if (prices[i] < buy)
+                buy = prices[i];
+        }
+
+        return maxProfit;
+    }
+
     static class Tuple<X, Y> {
         X x;
         Y y;

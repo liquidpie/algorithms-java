@@ -8,13 +8,15 @@ import java.util.List;
 public class BSTProperties {
 
     /**
-     * The trick is to write a utility helper function isBSTUtil(Node node, int min, int max)
+     * The trick is to write a utility helper function isBSTUtil(Node node, Node min, Node max)
      * that traverses down the tree keeping track of the narrowing min and max allowed values as it goes,
      * looking at each node only once. The initial values for min and max should be INT_MIN and INT_MAX
      * — then narrow from there.
+     *
+     * https://walkccc.me/LeetCode/problems/0098/
      */
     static boolean isBST(Node node) {
-        return isBSTUtil(node, Integer.MIN_VALUE, Integer.MAX_VALUE);
+        return isBSTUtil(node, null, null);
     }
 
     private static boolean isBSTUtil(Node node, int min, int max) {
@@ -27,6 +29,22 @@ public class BSTProperties {
 
         return isBSTUtil(node.left, min, node.data - 1) &&
                 isBSTUtil(node.right, node.data + 1, max);
+    }
+
+    private static boolean isBSTUtil(Node node, Node min, Node max) {
+        // an empty tree is BST
+        if (node == null)
+            return true;
+
+        if (min != null && node.data <= min.data) {
+            return false;
+        }
+        if (max != null && node.data >= max.data) {
+            return false;
+        }
+
+        return isBSTUtil(node.left, min, node) &&
+                isBSTUtil(node.right, node, max);
     }
 
     /**
@@ -97,6 +115,10 @@ public class BSTProperties {
         for (Node node: nodes) {
             System.out.println(node.data);
         }
+
+        Node root2 = new Node(Integer.MIN_VALUE);
+        root2.left = new Node(Integer.MIN_VALUE);
+        System.out.println(isBST(root2));
     }
 
 }
