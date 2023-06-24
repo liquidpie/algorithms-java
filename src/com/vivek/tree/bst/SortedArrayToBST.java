@@ -7,11 +7,14 @@ import com.vivek.tree.Node;
  */
 public class SortedArrayToBST {
 
-    Node createBST(int[] array) {
+    public static Node createBST(int[] array) {
         return addToTree(array, 0, array.length);
     }
 
-    Node addToTree(int[] array, int start, int end) {
+    public static Node createBST(int[] array, int start, int end) {
+        return addToTree(array, start, end);
+    }
+    static Node addToTree(int[] array, int start, int end) {
         if (start > end) {
             return null;
         }

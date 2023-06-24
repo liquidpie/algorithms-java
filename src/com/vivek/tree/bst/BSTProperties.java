@@ -19,17 +19,17 @@ public class BSTProperties {
         return isBSTUtil(node, null, null);
     }
 
-    private static boolean isBSTUtil(Node node, int min, int max) {
-        // an empty tree is BST
-        if (node == null)
-            return true;
-
-        if (node.data < min || node.data > max)
-            return false;
-
-        return isBSTUtil(node.left, min, node.data - 1) &&
-                isBSTUtil(node.right, node.data + 1, max);
-    }
+//    private static boolean isBSTUtil(Node node, int min, int max) {
+//        // an empty tree is BST
+//        if (node == null)
+//            return true;
+//
+//        if (node.data < min || node.data > max)
+//            return false;
+//
+//        return isBSTUtil(node.left, min, node.data - 1) &&
+//                isBSTUtil(node.right, node.data + 1, max);
+//    }
 
     private static boolean isBSTUtil(Node node, Node min, Node max) {
         // an empty tree is BST
@@ -97,6 +97,21 @@ public class BSTProperties {
 
         if (node.data < max)
             findAllNodesInRange(node.right, min, max, nodes);
+    }
+
+    public static int sizeOfTree(Node root) {
+        if (root == null) {
+            return 0;
+        }
+
+        // Calculate left size recursively
+        int left = sizeOfTree(root.left);
+
+        // Calculate right size recursively
+        int right = sizeOfTree(root.right);
+
+        // Return total size recursively
+        return (left + right + 1);
     }
 
     public static void main(String[] args) {
