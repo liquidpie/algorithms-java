@@ -1,7 +1,5 @@
 package com.vivek.dp;
 
-import java.util.Arrays;
-
 /**
  * Unique Paths II
  *
