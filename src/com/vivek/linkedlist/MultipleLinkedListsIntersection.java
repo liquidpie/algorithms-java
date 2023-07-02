@@ -58,63 +58,47 @@ public class MultipleLinkedListsIntersection {
                 "q->r",
                 "y->x",
                 "w->z",
-                "y, z, a, r"
+                "a, w"
         };
 
         lines = Arrays.asList(arr);
 
         Collection<List<SinglyLinkedList>> lists = buildSLL(lines);
         for (List<SinglyLinkedList> list : lists) {
-            boolean output = doLinkedListsIntersect(list);
-            System.out.println(output ? "True" : "False");
+            try {
+                boolean output = doLinkedListsIntersect(list);
+                System.out.println(output ? "True" : "False");
+            } catch (Exception exception) {
+                System.out.println("Error Thrown!");
+            }
         }
-
     }
 
     private static boolean doLinkedListsIntersect(List<SinglyLinkedList> lists) throws Exception {
+        Set<SinglyLinkedList.Node> allVisited = new HashSet<>();
 
-        int k = lists.size();
-        if (k == 0)
-            return false;
-
-        int last = k - 1;
-        while (last != 0) {
-            int i  = 0;
-            int j = last;
-
-            while (i < j) {
-                boolean out = doLinkedListsIntersect(lists.get(i), lists.get(j));
-                if (out)
-                    return true;
-
-                i++;
-                j--;
-
-                if (i >= j)
-                    last = j;
-            }
+        for (SinglyLinkedList list : lists) {
+            boolean out = doLinkedListsIntersect(list, allVisited);
+            if (out)
+                return true;
         }
 
         return false;
-
     }
 
-    private static boolean doLinkedListsIntersect(SinglyLinkedList sll1, SinglyLinkedList sll2) throws Exception {
-        Set<SinglyLinkedList.Node> table = new HashSet<>();
+    private static boolean doLinkedListsIntersect(SinglyLinkedList sll, Set<SinglyLinkedList.Node> allVisited) throws Exception {
+        Set<SinglyLinkedList.Node> cycleDetection = new HashSet<>();
 
-        SinglyLinkedList.Node list1 = sll1.getHead();
-        SinglyLinkedList.Node list2 = sll2.getHead();
-        while(list1 != null) {
-            if (table.contains(list1))
+        SinglyLinkedList.Node node = sll.getHead();
+        while(node != null) {
+            if (cycleDetection.contains(node))
                 throw new Exception("Cycle detected");
-            table.add(list1);
-            list1 = list1.getNext();
-        }
-
-        while (list2 != null) {
-            if (table.contains(list2))
+            if (allVisited.contains(node))
                 return true;
-            list2 = list2.getNext();
+
+            cycleDetection.add(node);
+            allVisited.add(node);
+            node = node.getNext();
         }
 
         return false;
