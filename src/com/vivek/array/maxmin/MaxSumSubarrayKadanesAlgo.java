@@ -1,4 +1,4 @@
-package com.vivek.array;
+package com.vivek.array.maxmin;
 
 import java.util.ArrayList;
 import java.util.List;

@@ -1,4 +1,4 @@
-package com.vivek.array;
+package com.vivek.array.maxmin;
 
 /**
  * Created by VJaiswal on 08/04/18.
