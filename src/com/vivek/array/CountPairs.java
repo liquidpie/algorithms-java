@@ -59,7 +59,7 @@ public class CountPairs {
              int countPairs(int[] arr, int k) {
                  Arrays.sort(arr);
                  // remove duplicates
-                 int size = ArrayMisc.removeDuplicates(arr);
+                 int size = RemoveDuplicates.removeDuplicates(arr);
                  int count = 0;
                  // binary search
                  for (int i = 0; i < size - 1; i++) {
