@@ -1,6 +1,7 @@
 package com.vivek.array;
 
 import java.util.Stack;
+import java.util.concurrent.atomic.AtomicInteger;
 
 /**
  * Find the largest rectangular area possible in a given histogram where the largest rectangle can be made of a number of contiguous bars.
@@ -17,12 +18,14 @@ import java.util.Stack;
  3) If the stack is not empty, then one by one remove all bars from stack and do step 2.b for every removed bar.
 
  * https://www.geeksforgeeks.org/largest-rectangle-under-histogram/
+ * https://www.youtube.com/watch?v=lJLcqDsmYfg
+ * https://leetcode.com/problems/largest-rectangle-in-histogram/
  */
 public class LargestRectangleInHistogram {
 
     // The main function to find the maximum rectangular area under given
     // histogram with n bars
-    static int getMaxArea(int hist[], int n) {
+    static int getMaxArea(int[] hist, int n) {
         // Create an empty stack. The stack holds indexes of hist[] array
         // The bars stored in stack are always in increasing order of their
         // heights.
@@ -70,10 +73,30 @@ public class LargestRectangleInHistogram {
 
     }
 
+    // Concise solution
+    static int largestRectangleArea(int[] heights) {
+        int ans = 0;
+        Stack<Integer> stack = new Stack<>();
+
+        for (int i = 0; i <= heights.length; ++i) {
+            while (!stack.isEmpty() && (i == heights.length || heights[stack.peek()] > heights[i])) {
+                final int h = heights[stack.pop()];
+                final int w = stack.isEmpty() ? i : i - stack.peek() - 1;
+                ans = Math.max(ans, h * w);
+            }
+            stack.push(i);
+        }
+
+        return ans;
+    }
+
+
     // Driver program to test above function
     public static void main(String[] args) {
-        int hist[] = { 6, 2, 5, 4, 5, 1, 6 };
-        System.out.println("Maximum area is " + getMaxArea(hist, hist.length));
+//        int[] hist = { 6, 2, 5, 4, 5, 1, 6 };
+        int[] hist = { 2,1,5,6,2,3 };
+//        System.out.println("Maximum area is " + getMaxArea(hist, hist.length));
+        System.out.println("Maximum area is " + largestRectangleArea(hist));
     }
 
 }

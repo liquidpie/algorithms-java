@@ -45,6 +45,14 @@ import java.util.Stack;
  *  - Traverse the given array and for each index i, the product can be calculated by:
  *      arr[i] * (presum[r[i]] – presum[l[i]-1])
  *
+ * We store elements in a stack st in a non-decreasing order. When we need to remove an element j from the stack, it means:
+ *
+ * Elements from j to i - 1 are all greater than j.
+ * Elements after the new top of the stack iare all greater than j.
+ * Therefore, we can multiply the current element j to the sum of all elements between the new top of the stack and i.
+ *
+ * https://leetcode.com/problems/maximum-subarray-min-product/solutions/1198896/o-n-monostack-with-picture/
+ *
  * Print the maximum product after completing all the above steps
  *
  * Time Complexity: O(N)
@@ -57,77 +65,33 @@ import java.util.Stack;
 public class MaxSubarrayMinProduct {
 
     public static void main(String[] args) {
-        int[] nums = {3, 1, 6, 4, 5, 2};
+        int[] nums = {2,3,3,1,2};
         System.out.println(maxSumMinProduct(nums));
     }
 
     static int maxSumMinProduct(int[] nums) {
+        int mod = 1_000_000_007;
         int n = nums.length;
-        int[] presum = new int[n];
-        presum[0] = nums[0];
+        long[] presum = new long[n + 1];
 
         // Find the prefix sum array
-        for (int i = 1; i < n; i++) {
-            presum[i] += presum[i - 1] + nums[i];
-        }
-
-        // l[] and r[] stores index of
-        // nearest smaller elements on
-        // left and right respectively
-        int[] l = new int[n];
-        int[] r = new int[n];
-
-        Stack<Integer> stack = new Stack<>();
-        l[0] = 0;
-        // Find all left index
-        for (int i = 1; i < n; i++) {
-            // Until stack is non-empty
-            // & top element is greater
-            // than the current element
-            while (!stack.isEmpty() && nums[stack.peek()] >= nums[i])
-                stack.pop();
-
-            if (!stack.isEmpty())
-                l[i] = stack.peek() + 1;
-            else
-                l[i] = 0;
-
-            // Push the current index i
-            stack.push(i);
-        }
-
-        stack.clear();
-
-        // Find all right index
-        for (int i = n - 1; i >= 0; i--) {
-            // Until stack is non-empty
-            // & top element is greater
-            // than the current element
-            while (!stack.isEmpty() && nums[stack.peek()] >= nums[i])
-                stack.pop();
-
-            if (!stack.isEmpty())
-                r[i] = stack.peek() - 1;
-            else
-                r[i] = n - 1;
-
-            // Push the current index i
-            stack.push(i);
-        }
-
-        // stores the maximum product
-        int maxProduct = 0;
-        int tempProduct;
-
         for (int i = 0; i < n; i++) {
-            // calculate the product
-            tempProduct = nums[i] * (presum[r[i]] - (l[i] == 0 ? 0 : presum[l[i] - 1]));
-            // update the max product
-            maxProduct = Math.max(maxProduct, tempProduct);
-
+            presum[i + 1] = presum[i] + nums[i];
         }
 
-        return maxProduct;
+        long ans = 0;
+        Stack<Integer> stack = new Stack<>();
+
+        for (int i = 0; i <= n; i++) {
+            while (!stack.isEmpty() && (i == n || nums[stack.peek()] > nums[i])) {
+                final int minVal = nums[stack.pop()];
+                final long sum = presum[i] - presum[stack.isEmpty() ? 0 : stack.peek() + 1];
+                ans = Math.max(ans, minVal * sum);
+            }
+            stack.push(i);
+        }
+
+        return (int) ans % mod;
     }
 
 }
