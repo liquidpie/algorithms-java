@@ -44,6 +44,8 @@ package com.vivek.array;
 public class FloodFill {
 
     static void floodFill(int[][] screen, int x, int y, int oldVal, int newVal) {
+        if (newVal == oldVal)
+            return;
         int n = screen.length;
 
         // coordinates are outside the screen
