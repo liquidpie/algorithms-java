@@ -28,6 +28,7 @@ public class TreeProperties {
         return node.data + sumOfLeftSubtree(node.right);
     }
 
+    // Todo: not working properly, check iterative below
     static Node mirrorOfTree(Node node) {
         if (node == null) {
             return node;

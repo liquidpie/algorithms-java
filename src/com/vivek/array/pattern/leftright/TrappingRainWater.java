@@ -12,6 +12,15 @@ package com.vivek.array.pattern.leftright;
  * Input: arr[]   = {3, 0, 2, 0, 4}
  * Output: 7
  *
+ * Solution:
+ * The basic intuition of the problem is as follows:
+ *
+ * An element of the array can store water if there are higher bars on the left and the right.
+ * The amount of water to be stored in every position can be found by finding the heights of bars on the left and right sides.
+ * The total amount of water stored is the summation of the water stored in each index.
+ *
+ *
+ *
  * Reference: https://www.geeksforgeeks.org/trapping-rain-water/
  *
  */
