@@ -4,7 +4,7 @@ import java.util.LinkedList;
 
 public class SimpleGraph {
 
-    private final int v;
+    private final int v;  // number of vertices
     private final LinkedList<Integer>[] adjacency;
 
     public SimpleGraph(int v) {

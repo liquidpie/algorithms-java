@@ -8,6 +8,13 @@ import java.util.*;
  *     Expectation : Must visit nodes in the graph in increasing order of distances from the given node.
  *
  *     Hint: Variation of Dijkstra’s algorithm
+ *
+ *     To visit nodes in the undirected weighted graph in increasing order of distances from the given node,
+ *     you can use Dijkstra’s algorithm. It is a shortest path algorithm that works on graphs with non-negative edge weights.
+ *     It starts at the source node and explores the neighboring nodes first,
+ *     choosing the node with the smallest distance from the source node.
+ *     Then it updates the distance of its neighbors and continues until all nodes have been visited.
+ *     You can use a priority queue to keep track of the nodes with the smallest distance from the source node.
  */
 public class GraphIterator implements Iterator<String> {
     private final Map<String, Map<String, Integer>> graph;
