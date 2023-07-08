@@ -20,6 +20,8 @@ import java.util.List;
  * Solution
  * This problem is asking us to find out if it is possible to find a topological ordering of the given tasks. The tasks
  * are equivalent to the vertices and the prerequisites are the edges.
+ *
+ * Variation: https://leetcode.com/problems/course-schedule/
  */
 public class TaskScheduling {
 
