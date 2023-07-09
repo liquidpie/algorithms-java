@@ -24,7 +24,7 @@ import java.util.*;
  * Time and Space Complexity:
  * If we don’t have any prerequisites, all combinations of the tasks can represent a topological ordering. As we
  * know, that there can be N! combinations for ‘N’ numbers, therefore the time and space complexity of our
- * algorithm will be O(V ! ∗ E) where ‘V’ is the total number of tasks and ‘E’ is the total prerequisites. We need
+ * algorithm will be O(V! * E) where ‘V’ is the total number of tasks and ‘E’ is the total prerequisites. We need
  * the ‘E’ part because in each recursive call, at max, we remove (and add back) all the edges.
  */
 public class TaskSchedulingAllOrders {
