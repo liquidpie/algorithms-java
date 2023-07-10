@@ -1,4 +1,4 @@
-package com.vivek.graph.examples;
+package com.vivek.graph.pattern.toposort;
 
 import com.vivek.graph.TopologicalSortBFS;
 
