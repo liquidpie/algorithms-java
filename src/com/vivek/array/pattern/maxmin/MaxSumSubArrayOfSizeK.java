@@ -1,4 +1,4 @@
-package com.vivek.array.maxmin;
+package com.vivek.array.pattern.maxmin;
 
 public class MaxSumSubArrayOfSizeK {
     public static int findMaxSumSubArray(int k, int[] arr) {

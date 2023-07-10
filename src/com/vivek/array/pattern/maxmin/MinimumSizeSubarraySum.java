@@ -1,4 +1,4 @@
-package com.vivek.array.maxmin;
+package com.vivek.array.pattern.maxmin;
 
 /**
  * Minimum Size Subarray Sum
