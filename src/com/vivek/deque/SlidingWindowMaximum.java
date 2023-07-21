@@ -141,12 +141,13 @@ public class SlidingWindowMaximum {
     }
 
     public static void main(String[] args) {
-        int[] arr = { 12, 1, 78, 90, 57, 89, 56 };
-        int k = 3;
+//        int[] arr = { 12, 1, 78, 90, 57, 89, 56 };
+        int[] arr = { 9,10,9,-7,-4,-8,2,-6 };
+        int k = 5;
 
-//        dequeBased(arr, k);
+        dequeBased(arr, k);
 //        selfBalancingBstBased(arr, k);
-        maxHeapBased(arr, k);
+//        maxHeapBased(arr, k);
     }
 
 }
