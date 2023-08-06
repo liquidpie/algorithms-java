@@ -1,4 +1,4 @@
-package com.vivek.linkedlist;
+package com.vivek.linkedlist.cache;
 
 import java.util.HashMap;
 import java.util.Map;
