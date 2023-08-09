@@ -39,6 +39,7 @@ package com.vivek.linkedlist;
  *
  *     Time Complexity: O(N*log k) or O(n*k*log k)
  *     As outer while loop in function mergeKLists() runs log k times and every time it processes n*k elements.
+ *     O(n * k * log k).  There are log K levels as in each level the K arrays are divided in half and at each level, the k arrays are traversed.
  *     Auxiliary Space: O(N) or O(n*k)
  *     Because recursion is used in SortedMerge() and to merge the final 2 linked lists of size N/2, N recursive calls will be made.
  *
