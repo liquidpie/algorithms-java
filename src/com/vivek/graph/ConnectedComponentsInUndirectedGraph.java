@@ -1,7 +1,6 @@
 package com.vivek.graph;
 
 import java.util.ArrayList;
-import java.util.Iterator;
 import java.util.List;
 
 /**
@@ -42,7 +41,7 @@ import java.util.List;
  *
  * https://www.geeksforgeeks.org/program-to-count-number-of-connected-components-in-an-undirected-graph/
  */
-public class ConnectedComponentsInGraph {
+public class ConnectedComponentsInUndirectedGraph {
 
     public static void main(String[] args) {
         SimpleGraph graph = new SimpleGraph(6);
