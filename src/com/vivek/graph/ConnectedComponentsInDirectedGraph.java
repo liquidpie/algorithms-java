@@ -84,7 +84,7 @@ import java.util.*;
 public class ConnectedComponentsInDirectedGraph {
 
     public static void main(String[] args) {
-        Graph g = new Graph(8);
+        SimpleGraph g = new SimpleGraph(8);
         g.addEdge(0, 1);
         g.addEdge(1, 2);
         g.addEdge(2, 3);
@@ -96,80 +96,61 @@ public class ConnectedComponentsInDirectedGraph {
         g.addEdge(6, 7);
 
         System.out.println("Strongly Connected Components:");
-        g.printSCC();
+        printSCC(g);
     }
 
-    static class Graph {
-        private final int V;
+    static void printSCC(SimpleGraph graph) {
+        Stack<Integer> stack = new Stack<>();
+        boolean[] visited = new boolean[graph.vertices];
 
-        private final List<List<Integer>> adj;
+        for (int i = 0; i < graph.vertices; i++)
+            if (!visited[i])
+                fillOrder(graph, i, visited, stack);
 
-        Graph(int s) {
-            V = s;
-            adj = new ArrayList<>();
-            for (int i = 0; i < V; i++) {
-                adj.add(new ArrayList<>());
-            }
-        }
+        SimpleGraph reversed = transpose(graph);
 
-        void addEdge(int s, int d) {
-            adj.get(s).add(d);
-        }
+        for (int i = 0; i < graph.vertices; i++)
+            visited[i] = false;
 
-        void dfs(int source, boolean[] visited) {
-            visited[source] = true;
-            System.out.print(source + " ");
+        while (!stack.empty()) {
+            int s = stack.pop();
 
-            for (int neighbor : adj.get(source)) {
-                if (!visited[neighbor])
-                    dfs(neighbor, visited);
-            }
-        }
-
-        Graph transpose() {
-            Graph g = new Graph(V);
-            for (int s = 0; s < V; s++) {
-                for (int d : adj.get(s)) {
-                    g.addEdge(d, s);
-                }
-            }
-            return g;
-        }
-
-        void fillOrder(int s, boolean[] visited, Stack<Integer> stack) {
-            visited[s] = true;
-
-            for (int neighbor : adj.get(s)) {
-                if (!visited[neighbor]) {
-                    fillOrder(neighbor, visited, stack);
-                }
-            }
-            stack.push(s);
-        }
-
-        void printSCC() {
-            Stack<Integer> stack = new Stack<>();
-            boolean[] visited = new boolean[V];
-
-            for (int i = 0; i < V; i++)
-                if (!visited[i])
-                    fillOrder(i, visited, stack);
-
-            Graph gr = transpose();
-
-            for (int i = 0; i < V; i++)
-                visited[i] = false;
-
-            while (!stack.empty()) {
-                int s = stack.pop();
-
-                if (!visited[s]) {
-                    gr.dfs(s, visited);
-                    System.out.println();
-                }
+            if (!visited[s]) {
+                dfs(reversed, s, visited);
+                System.out.println();
             }
         }
     }
 
+    private static void dfs(SimpleGraph graph, int source, boolean[] visited) {
+        visited[source] = true;
+        System.out.print(source + " ");
+
+        for (int neighbor : graph.adjacencyList.get(source)) {
+            if (!visited[neighbor])
+                dfs(graph, neighbor, visited);
+        }
+    }
+
+    private static SimpleGraph transpose(SimpleGraph graph) {
+        SimpleGraph reversed = new SimpleGraph(graph.vertices);
+        for (int s = 0; s < graph.vertices; s++) {
+            for (int d : graph.adjacencyList.get(s)) {
+                reversed.addEdge(d, s);
+            }
+        }
+        return reversed;
+    }
+
+    private static void fillOrder(SimpleGraph graph, int s, boolean[] visited, Stack<Integer> stack) {
+        visited[s] = true;
+
+        for (int neighbor : graph.adjacencyList.get(s)) {
+            if (!visited[neighbor]) {
+                fillOrder(graph, neighbor, visited, stack);
+            }
+        }
+        stack.push(s);
+    }
 
 }

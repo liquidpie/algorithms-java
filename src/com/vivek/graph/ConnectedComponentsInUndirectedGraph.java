@@ -49,12 +49,20 @@ public class ConnectedComponentsInUndirectedGraph {
         graph.addEdge(0, 2);
         graph.addEdge(2, 4);
 
-        dfs(graph);
+        List<List<Integer> > connectedComponents = dfs(graph);
+
+        int index = 1;
+        for (List<Integer> component : connectedComponents) {
+            System.out.print("Component " + index++ + ": ");
+            for (Integer i : component)
+                System.out.print(i + " ");
+            System.out.println();
+        }
     }
 
-    static void dfs(SimpleGraph graph) {
+    static List<List<Integer>> dfs(SimpleGraph graph) {
         List<List<Integer>> components = new ArrayList<>();
-        int v = graph.getV();
+        int v = graph.vertices;
         boolean[] visited = new boolean[v];
 
         for (int i = 0; i < v; i++) {
@@ -65,13 +73,14 @@ public class ConnectedComponentsInUndirectedGraph {
             }
         }
         System.out.println(components.size());
+        return components;
     }
 
     static void dfs(int s, boolean[] visited, List<Integer> component, SimpleGraph graph) {
         visited[s] = true;
         component.add(s);
 
-        for (int u : graph.getAdjacency()[s]) {
+        for (int u : graph.adjacencyList.get(s)) {
             if (!visited[u]) {
                 dfs(u, visited, component, graph);
             }
