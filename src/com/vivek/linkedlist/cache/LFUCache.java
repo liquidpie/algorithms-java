@@ -3,6 +3,9 @@ package com.vivek.linkedlist.cache;
 import java.util.HashMap;
 import java.util.Map;
 
+/**
+ * https://www.enjoyalgorithms.com/blog/least-frequently-used-cache
+ */
 public class LFUCache {
 
     private final Map<Integer,DoublyLinkedList> freqList;

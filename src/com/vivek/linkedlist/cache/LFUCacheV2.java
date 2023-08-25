@@ -85,6 +85,7 @@ public class LFUCacheV2 {
         } else {
             if (cache.size() == capacity) {
                 Node removedNode = frequencyMap.get(minFrequency).iterator().next();
+                System.out.println("Evicted Node: " + removedNode);
                 frequencyMap.get(minFrequency).remove(removedNode);
                 cache.remove(removedNode.key);
             }
@@ -98,7 +99,7 @@ public class LFUCacheV2 {
     }
 
     private void incrementFrequency(Node node) {
-        frequencyMap.get(node.frequency).remove(node);
+        frequencyMap.get(node.frequency).remove(node); // O(1) operation
         if (node.frequency == minFrequency && frequencyMap.get(minFrequency).isEmpty())
             minFrequency++;
         node.frequency++;
@@ -116,6 +117,27 @@ public class LFUCacheV2 {
             this.value = value;
             this.frequency = frequency;
         }
+
+        @Override
+        public String toString() {
+            return "Node{" +
+                    "key=" + key +
+                    ", value=" + value +
+                    ", frequency=" + frequency +
+                    '}';
+        }
+    }
+
+    public static void main(String[] args) {
+        LFUCacheV2 lfuCache = new LFUCacheV2(3);
+        lfuCache.put(1, 1);
+        lfuCache.put(2, 2);
+        lfuCache.put(3, 3);
+        lfuCache.get(2);
+        lfuCache.get(3);
+        lfuCache.put(3, 33);
+        lfuCache.put(1, 11);
+        lfuCache.put(4, 4);
     }
 
 }
