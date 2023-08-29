@@ -12,7 +12,6 @@ import java.util.TreeMap;
  * int snap() takes a snapshot of the array and returns the snap_id: the total number of times we called snap() minus 1.
  * int get(index, snap_id) returns the value at the given index, at the time we took the snapshot with the given snap_id
  *
- *
  * Example 1:
  *
  * Input: ["SnapshotArray","set","snap","set","get"]
@@ -25,6 +24,11 @@ import java.util.TreeMap;
  * snapshotArr.snap();  // Take a snapshot, return snap_id = 0
  * snapshotArr.set(0,6);
  * snapshotArr.get(0,0);  // Get the value of array[0] with snap_id = 0, return 5
+ *
+ * Complexity ::
+ *      Time O(logS)
+ *      Space O(S)
+ *  where S is the number of set called.
  *
  * https://leetcode.com/problems/snapshot-array
  */
