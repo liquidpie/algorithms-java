@@ -27,9 +27,15 @@ public class PowerOfTwo {
     public static void main(String[] args) {
         // Determine if an integer is a power of two
         int x = 4;
-        boolean isPowerOfTwo = (x & (x - 1)) == 0;
+        boolean isPowerOfTwo = isPowerOfTwo(x);
 
         System.out.println(isPowerOfTwo);
+    }
+
+    static boolean isPowerOfTwo(int n) {
+        if (n <= 0)
+            return false;
+        return (n & (n - 1)) == 0;
     }
 
 }
