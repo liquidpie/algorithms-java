@@ -1,5 +1,6 @@
 package com.vivek.array;
 
+import com.vivek.array.pattern.leftright.RemoveDuplicates;
 import com.vivek.search.BinarySearch;
 
 import java.util.*;

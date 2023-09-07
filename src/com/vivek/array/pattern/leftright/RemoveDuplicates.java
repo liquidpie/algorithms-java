@@ -1,4 +1,4 @@
-package com.vivek.array;
+package com.vivek.array.pattern.leftright;
 
 /**
  * Remove Duplicates
@@ -23,7 +23,7 @@ public class RemoveDuplicates {
         System.out.println(removeDuplicates(nums));
     }
 
-    static int removeDuplicates(int[] arr) {
+    public static int removeDuplicates(int[] arr) {
         if (arr == null || arr.length == 0)
             return -1;
 
