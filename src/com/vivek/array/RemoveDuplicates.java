@@ -10,6 +10,11 @@ package com.vivek.array;
  * Input: [2, 3, 3, 3, 6, 9, 9]
  * Output: 4
  * Explanation: The first four elements after removing the duplicates will be [2, 3, 6, 9].
+ *
+ * Time Complexity #
+ *      The time complexity of the above algorithm will be O(N), where ‘N’ is the total number of elements in the given array.
+ * Space Complexity #
+ *      The algorithm runs in constant space O(1).
  */
 public class RemoveDuplicates {
 
