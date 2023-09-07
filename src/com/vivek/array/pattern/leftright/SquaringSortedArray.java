@@ -32,6 +32,10 @@ import java.util.Arrays;
  *      ptr1              ptr2
  *       '                 '
  *      -2    -1   0   2   3
+ *
+ * Time complexity #
+ * The time complexity of the above algorithm will be O(N ) as we are iterating the input array only once. Space complexity #
+ * The space complexity of the above algorithm will also be O(N); this space will be used for the output array.
  */
 public class SquaringSortedArray {
 
