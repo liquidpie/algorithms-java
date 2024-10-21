@@ -29,57 +29,68 @@ import java.util.Map;
  * The substring with start index = 1 is "ba", which is an anagram of "ab".
  * The substring with start index = 2 is "ab", which is an anagram of "ab".
  *
- *          * Approach: We use a map to maintain the frequency of characters
- *          * in p. We then use a separate map to maintain the frequency of
- *          * characters in s string. After that, we keep on removing the
- *          * old character and adding new characters in the map.
- *          *
- *          * Time Complexity : O(n)
- *          * Space Complexity: O(n)
+ *  Solution #
+ * This problem follows the Sliding Window pattern and is very similar to Permutation in a String.
+ * In this problem, we need to find every occurrence of any permutation of the pattern in the string.
+ * We will use a list to store the starting indices of the anagrams of the pattern in the string.
  *
+ * Time Complexity #
+ * The time complexity of the above algorithm will be O(N + M ) where ‘N’ and ‘M’ are the number of
+ * characters in the input string and the pattern respectively.
  *
- * https://leetcode.com/problems/find-all-anagrams-in-a-string/
+ * Space Complexity #
+ * The space complexity of the algorithm is O(M ) since in the worst case, the whole pattern can have distinct characters which will go into the HashMap.
+ * In the worst case, we also need O(N ) space for the result list, this will happen when the pattern has only one character and the string contains only that character.
+ *
+ * Reference:
+ * 1. https://leetcode.com/problems/find-all-anagrams-in-a-string/
+ * 2. Grokking the Coding Interview
+ * Pattern: Sliding Window
  */
 public class FindAllAnagramsInString {
 
     public static void main(String[] args) {
-        String s = "cbaebabacd", p = "abc";
-        System.out.println(findAnagrams(s, p));
+        System.out.println(findAnagrams("cbaebabacd", "abc"));
+        System.out.println(findAnagrams("ppqp", "pq"));
+        System.out.println(findAnagrams("abbcabc", "abc"));
     }
 
-    static List<Integer> findAnagrams(String s, String p) {
-        if(s.length() < p.length()) {
-            return new LinkedList<>();
-        }
-        Map<Character, Integer> patternMap = new HashMap<>();
-        for (char pCh : p.toCharArray()) {
-            patternMap.put(pCh, patternMap.getOrDefault(pCh, 0) + 1);
+    public static List<Integer> findAnagrams(String str, String pattern) {
+        Map<Character, Integer> patternFreq = new HashMap<>();
+        for (char ch : pattern.toCharArray()) {
+            patternFreq.put(ch, patternFreq.getOrDefault(ch, 0) + 1);
         }
 
-        Map<Character, Integer> textMap = new HashMap<>();
-        for (int i = 0; i < p.length(); i++) {
-            textMap.put(s.charAt(i), textMap.getOrDefault(s.charAt(i), 0) + 1);
-        }
+        int windowStart = 0;
+        int matched = 0;
+        List<Integer> resultIndices = new LinkedList<>();
 
-        List<Integer> result = new LinkedList<>();
-        if (textMap.equals(patternMap))
-            result.add(0);
-
-        for (int i = p.length(); i < s.length(); i++) {
-            char newChar = s.charAt(i);
-            char oldChar = s.charAt(i - p.length());
-            if (textMap.get(oldChar) == 1) {
-                textMap.remove(oldChar);
-            } else {
-                textMap.put(oldChar, textMap.get(oldChar) - 1);
+        for (int windowEnd = 0; windowEnd < str.length(); windowEnd++) {
+            char rightChar = str.charAt(windowEnd);
+            if (patternFreq.containsKey(rightChar)) {
+                patternFreq.put(rightChar, patternFreq.get(rightChar) - 1);
+                if (patternFreq.get(rightChar) == 0) {
+                    matched++;
+                }
             }
 
-            textMap.put(newChar, textMap.getOrDefault(newChar, 0) + 1);
-            if (textMap.equals(patternMap))
-                result.add(i - p.length() + 1);
+            if (matched == patternFreq.size()) {
+                resultIndices.add(windowStart);
+            }
+
+            if (windowEnd >= pattern.length() - 1) { // shrink the window by one char
+                char leftChar = str.charAt(windowStart);
+                if (patternFreq.containsKey(leftChar)) {
+                    if (patternFreq.get(leftChar) == 0)
+                        matched--;  // before putting the character back, decrement the matched count
+                    // put the character back for matching
+                    patternFreq.put(leftChar, patternFreq.get(leftChar) + 1);
+                }
+                windowStart++;
+            }
         }
 
-        return result;
+        return resultIndices;
     }
 
 }
