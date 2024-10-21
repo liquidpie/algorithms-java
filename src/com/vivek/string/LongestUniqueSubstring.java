@@ -18,6 +18,9 @@ import java.util.Map;
  *                           If we have seen the number, move the start pointer to position after the last occurrence
  *
  * Reference: https://www.geeksforgeeks.org/length-of-the-longest-substring-without-repeating-characters/
+ *
+ * Grokking the Coding Interview
+ * Pattern: Sliding Window Pattern
  */
 public class LongestUniqueSubstring {
 

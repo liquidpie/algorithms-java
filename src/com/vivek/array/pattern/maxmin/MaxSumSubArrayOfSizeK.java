@@ -1,5 +1,9 @@
 package com.vivek.array.pattern.maxmin;
 
+/**
+ * Grokking the Coding Interview
+ * Pattern: Sliding Window
+ */
 public class MaxSumSubArrayOfSizeK {
     public static int findMaxSumSubArray(int k, int[] arr) {
         int windowSum = 0, maxSum = 0;
