@@ -1,5 +1,8 @@
 package com.vivek.string;
 
+import java.util.HashMap;
+import java.util.Map;
+
 /**
  * Minimum Window Substring (Shortest subarray containing all chars of another string)
  *
@@ -28,8 +31,30 @@ package com.vivek.string;
  * Explanation: Both 'a's from t must be included in the window.
  * Since the largest window of s only has one 'a', return empty string.
  *
- * Approach:
+ * Solution #
+ * This problem follows the Sliding Window pattern and has a lot of similarities with Permutation in a String with one difference.
+ * In this problem, we need to find a substring having all characters of the pattern which means that the required substring
+ * can have some additional characters and doesn’t need to be a permutation of the pattern.
  *
+ * Here is how we will manage these differences:
+ * 1. We will keep a running count of every matching instance of a character.
+ * 2. Whenever we have matched all the characters, we will try to shrink the window from the beginning,
+ * keeping track of the smallest substring that has all the matching characters.
+ * 3. We will stop the shrinking process as soon as we remove a matched character from the sliding window.
+ * One thing to note here is that we could have redundant matching characters, e.g., we might have two ‘a’ in
+ * the sliding window when we only need one ‘a’. In that case, when we encounter the first ‘a’, we will simply shrink
+ * the window without decrementing the matched count. We will decrement the matched count when the second ‘a’ goes out of the window.
+ *
+ * Time Complexity #
+ * The time complexity of the above algorithm will be O(N + M ) where ‘N’ and ‘M’ are the number of
+ * characters in the input string and the pattern respectively.
+ *
+ * Space Complexity #
+ * The space complexity of the algorithm is O(M ) since in the worst case, the whole pattern can have distinct characters
+ * which will go into the HashMap. In the worst case, we also need O(N ) space for the resulting substring,
+ * which will happen when the input string is a permutation of the pattern.
+ *
+ * Approach:
  * For most substring problem, we are given a string and need to find a substring of it which satisfy some restrictions.
  * A general way is to use a hashmap assisted with two pointers. The template is given below.
  *
@@ -41,56 +66,62 @@ package com.vivek.string;
  * And use counter for the number of chars of t to be found in s. The key part is m[s[end]]--;.
  * We decrease count for each char in s. If it does not exist in t, the count will be negative.
  *
+ * Reference:
+ * Grokking the Coding Interview
+ * Pattern: Sliding Window
+ *
  * https://leetcode.com/problems/minimum-window-substring/
  */
 public class MinimumWindowSubstring {
 
     public static void main(String[] args) {
-        String s = "ADOBECODEBANC", t = "ABC";
-        System.out.println(minWindow(s, t));
+        System.out.println(findSubstring("ADOBECODEBANC", "ABC"));
+        System.out.println(findSubstring("aabdec", "abc"));
+        System.out.println(findSubstring("abdabca", "abc"));
+        System.out.println(findSubstring("adcad", "abc"));
     }
 
-    static String minWindow(String s, String t) {
-        int[] map = new int[128];
-        for (char ch : t.toCharArray()) {
-            map[ch]++;
-        }
-
-        int start = 0;
-        int end = 0;
-        int minStart = 0;
+    private static String findSubstring(String str, String pattern) {
         int minLen = Integer.MAX_VALUE;
-        int counter = t.length();
+        int windowStart = 0;
+        int subStrStart = 0;
+        int matched = 0;
 
-        while (end < s.length()) {
-            char curr = s.charAt(end);
-            // If char in s exists in t, decrease counter
-            if (map[curr] > 0 ) {
-                counter--;
+        Map<Character, Integer> freqMap = new HashMap<>();
+        for (char ch : pattern.toCharArray()) {
+            freqMap.put(ch, freqMap.getOrDefault(ch, 0) + 1);
+        }
+
+        for (int windowEnd = 0; windowEnd < str.length(); windowEnd++) {
+            char rightChar = str.charAt(windowEnd);
+            if (freqMap.containsKey(rightChar)) {
+                freqMap.put(rightChar, freqMap.get(rightChar) - 1);
+                if (freqMap.get(rightChar) >= 0) { // count every matching of a character
+                    matched++;
+                }
             }
-            // Decrease map[curr]. If char does not exist in t, map[curr] will be negative.
-            map[curr]--;
-            end++;
 
-            // When we found a valid window, move start to find smaller window.
-            while (counter == 0) {
-                if (minLen > end - start) {
-                    minLen = end - start;
-                    minStart = start;
+            // shrink the window if we can, finish as soon as we remove a matched character
+            while (matched == pattern.length()) {
+                if (minLen > windowEnd - windowStart + 1) {
+                    minLen = windowEnd - windowStart + 1;
+                    subStrStart = windowStart;
                 }
 
-                char startChar = s.charAt(start);
-                map[startChar]++;
-
-                // When char exists in t, increase counter.
-                if (map[startChar] > 0) {
-                    counter++;
+                char leftChar = str.charAt(windowStart);
+                if (freqMap.containsKey(leftChar)) {
+                    // note that we could have redundant matching characters, therefore we'll decrement the
+                    // matched count only when a useful occurrence of a matched character is going out of the window
+                    if (freqMap.get(leftChar) == 0) {
+                        matched--;
+                    }
+                    freqMap.put(leftChar, freqMap.get(leftChar) + 1);
                 }
-                start++;
+                windowStart++;
             }
         }
 
-        return minLen == Integer.MAX_VALUE ? "" : s.substring(minStart, minStart + minLen);
+        return minLen == Integer.MAX_VALUE ? "" : str.substring(subStrStart, subStrStart + minLen);
     }
 
     // Template -->
