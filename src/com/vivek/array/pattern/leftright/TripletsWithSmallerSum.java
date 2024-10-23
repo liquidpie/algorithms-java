@@ -78,6 +78,12 @@ public class TripletsWithSmallerSum {
      * Similar Problems #
      * Problem: Write a function to return the list of all such triplets instead of the count. How will the time
      * complexity change in this case?
+     *
+     * Time complexity #
+     * So, overall searchTriplets() will take O(N ∗ logN + N3), which is asymptotically equivalent to O(N3).
+     *
+     * Space complexity #
+     * Ignoring the space required for the output array, the space complexity of the above algorithm will be O(N) which is required for sorting.
      */
     public static List<List<Integer>> getTriplets(int[] arr, int target) {
         if (arr == null || arr.length < 3)
