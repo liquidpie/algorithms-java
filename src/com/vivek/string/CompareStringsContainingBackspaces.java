@@ -34,6 +34,12 @@ package com.vivek.string;
  * If, at any stage, the character pointed out by any of the pointers is a backspace (’#’),
  * we will skip and apply the backspace until we have a valid character available for comparison.
  *
+ * Time complexity #
+ * The time complexity of the above algorithm will be O(M + N ) where ‘M’ and ‘N’ are the lengths of the two
+ *
+ * Space complexity #
+ * The algorithm runs in constant space O(1).
+ *
  * Reference:
  * Grokking the Coding Interview
  * Pattern: Two Pointer
