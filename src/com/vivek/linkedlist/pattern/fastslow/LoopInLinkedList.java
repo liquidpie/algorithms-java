@@ -1,4 +1,6 @@
-package com.vivek.linkedlist;
+package com.vivek.linkedlist.pattern.fastslow;
+
+import com.vivek.linkedlist.Node;
 
 import java.util.HashSet;
 import java.util.Set;
