@@ -24,6 +24,10 @@ import java.util.Set;
  * Move one pointer by one and other pointer by two. 
  * If these pointers meet at some node then there is a loop. 
  * If pointers do not meet then linked list doesn�t have loop.
+ *
+ * Reference:
+ * Grokking the Coding Interview
+ * Pattern: Fast Slow
  */
 public class LoopInLinkedList {
 
@@ -41,25 +45,16 @@ public class LoopInLinkedList {
 	}
 
 	private static boolean floydCycleFindingAlgorithm(Node node) {
-		if(node == null) // list does not exist..so no loop either.
-			return false;
+		Node slow = node;
+		Node fast = node;
 
-		Node slow, fast; // create two references.
-		slow = fast = node; // make both refer to the start of the list.
-
-		while(true) {
-			slow = slow.next;          // 1 hop.
-			if(fast.next != null)
-				fast = fast.next.next; // 2 hops.
-			else
-				return false;          // next node null => no loop.
-
-			if(slow == null || fast == null) // if either hits null..no loop.
-				return false;
-
-			if(slow == fast) // if the two ever meet...we must have a loop.
-				return true;
+		while (fast != null && fast.next != null) {
+			fast = fast.next.next;
+			slow = slow.next;
+			if (slow == fast)
+				return true; // found the cycle
 		}
+		return false;
 	}
 
 	private static boolean hashSaveNodes(Node node) {
