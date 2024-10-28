@@ -16,7 +16,7 @@ public class Node {
 		}
 	}
 
-	static void print(Node head) {
+	public static void print(Node head) {
 		Node node = head;
 		String delimiter = "";
 		while (node != null) {
