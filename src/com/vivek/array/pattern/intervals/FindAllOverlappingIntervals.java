@@ -13,6 +13,9 @@ import java.util.List;
  *      [4,5] and [3,6] conflict.
  *      [3,6] and [5,7] conflict.
  *
+ * Solution:
+ * Follow the solution of Merge Intervals
+ *
  * Reference:
  * Grokking the Coding Interview
  * Pattern: Merge Intervals
