@@ -1,4 +1,4 @@
-package com.vivek.array.examples;
+package com.vivek.array.pattern.intervals;
 
 import java.util.Arrays;
 import java.util.PriorityQueue;
