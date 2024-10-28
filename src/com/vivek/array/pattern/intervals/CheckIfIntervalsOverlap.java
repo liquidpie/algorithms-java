@@ -41,6 +41,11 @@ public class CheckIfIntervalsOverlap {
         Arrays.sort(intervals, (a, b) -> a.start - b.start);
 
         for (int i = 1; i < intervals.length; i++) {
+            // please note the comparison above, it is "<" and not "<="
+            // while merging we needed "<=" comparison, as we will be merging the two
+            // intervals having condition "intervals[i].start == intervals[i - 1].end" but
+            // such intervals don't represent conflicting appointments as one starts right
+            // after the other
             if (intervals[i].start < intervals[i - 1].end)
                 return true;
         }
