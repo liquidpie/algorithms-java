@@ -1,9 +1,11 @@
-package com.vivek.linkedlist;
+package com.vivek.linkedlist.pattern.reverse;
+
+import com.vivek.linkedlist.Node;
 
 public class ReverseLinkedList {
 
 	// Iterative solution for reversal
-	Node iterativeReverse(Node head) {
+	public Node iterativeReverse(Node head) {
 	    Node prev = null;
 	    Node current = head;
 	    Node next = null;
