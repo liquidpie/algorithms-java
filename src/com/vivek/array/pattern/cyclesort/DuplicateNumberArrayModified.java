@@ -31,6 +31,10 @@ package com.vivek.array.pattern.cyclesort;
  *
  * Space complexity #
  * The algorithm runs in constant space O(1) but modifies the input array.
+ *
+ *  * Reference:
+ *  * Grokking the Coding Interview
+ *  * Pattern: Cycle Sort
  */
 public class DuplicateNumberArrayModified {
 
