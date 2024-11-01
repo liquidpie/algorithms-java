@@ -1,4 +1,6 @@
-package com.vivek.tree;
+package com.vivek.tree.pattern.bfs;
+
+import com.vivek.tree.Node;
 
 import java.util.LinkedList;
 import java.util.Queue;
@@ -19,6 +21,10 @@ import java.util.Queue;
  * This problem follows the Binary Tree Level Order Traversal pattern. We can follow the same BFS approach.
  * The only difference will be, instead of keeping track of all the nodes in a level, we will only track the depth of
  * the tree. As soon as we find our first leaf node, that level will represent the minimum depth of the tree.
+ *
+ * Reference:
+ * Grokking the Coding Interview
+ * Pattern: BFS
  */
 public class MinDepth {
 

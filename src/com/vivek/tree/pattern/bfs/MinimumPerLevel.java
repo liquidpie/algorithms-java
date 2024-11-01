@@ -1,4 +1,6 @@
-package com.vivek.tree;
+package com.vivek.tree.pattern.bfs;
+
+import com.vivek.tree.Node;
 
 import java.util.LinkedList;
 import java.util.Queue;
