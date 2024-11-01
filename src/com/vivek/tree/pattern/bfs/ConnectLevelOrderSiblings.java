@@ -1,9 +1,11 @@
-package com.vivek.tree;
+package com.vivek.tree.pattern.bfs;
 
 import java.util.LinkedList;
 import java.util.Queue;
 
 /**
+ * Connect Level Order Siblings (medium)
+ *
  * Given a binary tree, connect each node with its level order successor. The last node of each level should point
  * to a null node.
  * Example:
@@ -11,11 +13,24 @@ import java.util.Queue;
  *              2    ->   3 -> null
  *          4 -> 5 -> 6 -> 7 -> null
  *
+ * Time complexity #
+ * The time complexity of the above algorithm is O(N), where ‘N’ is the total number of nodes in the tree. This
+ * is due to the fact that we traverse each node once.
  *
+ * Space complexity #
+ * The space complexity of the above algorithm will be O(N), which is required for the queue.
+ * Since we can have a maximum of N /2 nodes at any level (this could happen only at the lowest level),
+ * therefore we will need O(N ) space to store them in the queue.
+ *
+ * Reference:
+ * Grokking the Coding Interview
+ * Pattern: BFS
  */
 public class ConnectLevelOrderSiblings {
 
     static void connectLevelOrderSiblings(Node root) {
+        if (root == null)
+            return;
         Queue<Node> queue = new LinkedList<>();
         queue.add(root);
 
@@ -35,7 +50,7 @@ public class ConnectLevelOrderSiblings {
         }
     }
 
-    private static class Node {
+    static class Node {
         int data;
         Node left, right, next;
 
