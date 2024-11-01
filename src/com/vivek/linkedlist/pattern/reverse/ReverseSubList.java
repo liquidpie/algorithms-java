@@ -15,6 +15,12 @@ import com.vivek.linkedlist.Node;
  * 3. Next, reverse the nodes from p to q using the same approach discussed in Reverse a LinkedList.
  * 4. Connect the p-1 and q+1 nodes to the reversed sub-list.
  *
+ * Time complexity #
+ * The time complexity of our algorithm will be O(N ) where ‘N’ is the total number of nodes in the LinkedList.
+ *
+ * Space complexity #
+ * We only used constant space, therefore, the space complexity of our algorithm is O(1).
+ *
  * Reference:
  * Grokking the Coding Interview
  * Reversal of LinkedList
