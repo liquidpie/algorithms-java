@@ -174,19 +174,30 @@ public class TreeProperties {
      * 2. the diameter of T’s right subtree
      * 3. the longest path between leaves that goes through the root of T (this can be computed from the heights of the subtrees of T)
      *
+     * Reference:
+     * Grokking the Coding Interview
+     * Pattern: DFS
      */
-    static int diameter(Node node) {
+    static int treeDiameter = 0;
+
+    static int diameter(Node root) {
+        calculateHeight(root);
+        return treeDiameter;
+    }
+    static int calculateHeight(Node node) {
         if (node == null)
             return 0;
 
-        int lheight = height(node.left);
-        int rheight = height(node.right);
+        int lheight = calculateHeight(node.left);
+        int rheight = calculateHeight(node.right);
 
-        int ldiameter = diameter(node.left);
-        int rdiameter = diameter(node.right);
+        // diameter at the current node will be equal to the height of left subtree +
+        // the height of right sub-trees + '1' for the current node
+        int diameter = lheight + rheight + 1;
+        // update the global tree diameter
+        treeDiameter = Math.max(treeDiameter, diameter);
 
-        return Math.max(lheight + rheight + 1,
-                Math.max(ldiameter, rdiameter));
+        return Math.max(lheight, rheight) + 1;
     }
 
     /**
