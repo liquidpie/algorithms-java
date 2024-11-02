@@ -1,4 +1,6 @@
-package com.vivek.tree;
+package com.vivek.tree.pattern.dfs;
+
+import com.vivek.tree.Node;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -7,55 +9,6 @@ import java.util.List;
  * Created by VJaiswal on 30/04/18.
  */
 public class PathSum {
-
-    /**
-     * Root to leaf path sum equal to a given number
-     */
-    boolean rootToLeaf(Node node, int sum) {
-        if (node == null) {
-            return sum == 0;
-        }
-
-        boolean ans = false;
-        int subsum = sum - node.data;
-
-        if (subsum == 0 && node.left == null && node.right == null)
-            return true;
-
-        if (node.left != null) {
-            ans = ans || rootToLeaf(node.left, subsum);
-        }
-        if (node.right == null) {
-            ans = ans || rootToLeaf(node.right, subsum);
-        }
-
-        return ans;
-    }
-
-    /**
-     * Print paths from Root to leaf whose path sum equal to a given number
-     */
-    void printRootToLeafPaths(Node node, List<Node> paths, int sum, int sumSoFar) {
-        if (node == null)
-            return;
-
-        // add current node to paths
-        paths.add(node);
-
-        sumSoFar += node.data;
-
-        // print the required path
-        if (sumSoFar == sum && node.left == null && node.right == null) {
-            printPaths(paths, 0);
-        }
-
-        printRootToLeafPaths(node.left, paths, sum, sumSoFar);
-
-        printRootToLeafPaths(node.right, paths, sum, sumSoFar);
-
-        // Remove the current element from the path
-        paths.remove(paths.size() - 1);
-    }
 
     /**
      * Root to any node path sum equal to a given number
@@ -170,7 +123,7 @@ public class PathSum {
 
         int sum = 38;
 
-        pathSum.printRootToLeafPaths(root, new ArrayList<>(), sum, 0);
+        pathSum.rootToNode(root, sum);
 
     }
 
