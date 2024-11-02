@@ -1,4 +1,4 @@
-package com.vivek.heap;
+package com.vivek.heap.pattern.twoheaps;
 
 import java.util.Collections;
 import java.util.PriorityQueue;
@@ -34,6 +34,10 @@ import java.util.PriorityQueue;
  * Space complexity:
  * Ignoring the space needed for the output array, the space complexity will be O(K) because, at any time, we
  * will be storing all the numbers within the sliding window.
+ *
+ * Reference:
+ * Grokking the Coding Interview
+ * Pattern: Two Heaps
  */
 public class SlidingWindowMedian {
 

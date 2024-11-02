@@ -1,4 +1,4 @@
-package com.vivek.heap;
+package com.vivek.heap.pattern.twoheaps;
 
 import java.util.PriorityQueue;
 
@@ -41,7 +41,10 @@ import java.util.PriorityQueue;
  * Space complexity :
  * The space complexity will be O(N) because, as at any time, we will be storing all the numbers.
  *
- * https://leetcode.com/problems/find-median-from-data-stream/
+ * Reference:
+ *      1. https://leetcode.com/problems/find-median-from-data-stream/
+ *      2. Grokking the Coding Interview
+ *         Pattern: Two Heaps
  */
 public class MedianOfAStream {
 
