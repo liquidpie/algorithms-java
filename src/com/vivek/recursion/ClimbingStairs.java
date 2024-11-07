@@ -73,7 +73,31 @@ public class ClimbingStairs {
     static Map<Integer, Integer> memo = new HashMap<>();
 
     public static void main(String[] args) {
-        System.out.println(climbStairs(4));
+//        System.out.println(climbStairs(4));
+        System.out.println(climbStairsEfficient(4));
+    }
+
+    /**
+     * Number of ways to reach top can be divided into smaller sub-problems
+     * Current ways = ways for step i - 1 + ways for step i - 2
+     * Time Complexity: O(n)
+     * Space Complexity: O(1)
+     */
+    static int climbStairsEfficient(int n) {
+        if (n <= 1)
+            return 1;
+
+        int currentStep = 0; // step i
+        int prevStep1 = 1; // step i - 1
+        int prevStep2 = 1; // step i - 2
+
+        for (int i = 2; i < n + 1; i++) {
+            currentStep = prevStep1 + prevStep2;
+            prevStep2 = prevStep1;
+            prevStep1 = currentStep;
+        }
+
+        return currentStep;
     }
 
 
