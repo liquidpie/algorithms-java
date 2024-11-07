@@ -17,6 +17,9 @@ import java.util.concurrent.atomic.AtomicInteger;
 
  3) If the stack is not empty, then one by one remove all bars from stack and do step 2.b for every removed bar.
 
+ Time Complexity: O(n)
+ Space Complexity: O(n)
+
  * https://www.geeksforgeeks.org/largest-rectangle-under-histogram/
  * https://www.youtube.com/watch?v=lJLcqDsmYfg
  * https://leetcode.com/problems/largest-rectangle-in-histogram/
@@ -95,8 +98,8 @@ public class LargestRectangleInHistogram {
     public static void main(String[] args) {
 //        int[] hist = { 6, 2, 5, 4, 5, 1, 6 };
         int[] hist = { 2,1,5,6,2,3 };
-//        System.out.println("Maximum area is " + getMaxArea(hist, hist.length));
-        System.out.println("Maximum area is " + largestRectangleArea(hist));
+        System.out.println("Maximum area is " + getMaxArea(hist, hist.length));
+//        System.out.println("Maximum area is " + largestRectangleArea(hist));
     }
 
 }

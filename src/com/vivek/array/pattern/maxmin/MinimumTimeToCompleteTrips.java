@@ -39,8 +39,10 @@ package com.vivek.array.pattern.maxmin;
 public class MinimumTimeToCompleteTrips {
 
     public static void main(String[] args) {
-        int[] times = {1,3,5,7,8};
-        int noOfTrips = 10;
+//        int[] times = {1,3,5,7,8};
+        int[] times = {1,2,3};
+        int noOfTrips = 5;
+//        int noOfTrips = 10;
 
         System.out.println(minimumTime(times, noOfTrips));
     }
