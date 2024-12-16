@@ -4,123 +4,205 @@ import java.util.HashMap;
 import java.util.Map;
 
 /**
+ * LFU Cache with following methods: get(key), put(key, value) and resize(capacity)
+ *
+ * LFU evicts keys from the cache based on least frequent usage. However, in case of tie, it evicts keys which are least recently used
+ *
  * https://www.enjoyalgorithms.com/blog/least-frequently-used-cache
  */
-public class LFUCache {
+public class LFUCache<K, V> {
 
-    private final Map<Integer,DoublyLinkedList> freqList;
-    private final Map<Integer,Node> lfuCache;
-    private final int capacity;
+    private final Map<K, Entry> cache;
+    private final Map<Integer, DoublyLinkedList> freqList;
+    private int capacity;
     private int minFreq;
+
     public LFUCache(int capacity) {
-        this.capacity = capacity;
-        this.minFreq = 1;
+        this.cache = new HashMap<>();
         this.freqList = new HashMap<>();
-        this.lfuCache = new HashMap<>();
+        this.capacity = capacity;
+        this.minFreq = 0;
     }
 
-    public int get(int key) {
-        if (lfuCache.get(key) == null)
-            return -1;
-        Node v = lfuCache.get(key);
-        freqList.get(v.freq).removeNode(v);
-        if (freqList.get(v.freq).isEmpty()) {
-            if(minFreq == v.freq){
-                minFreq = v.freq + 1;
-            }
-        }
-        v.freq += 1;
-        if (freqList.get(v.freq) == null) {
-            DoublyLinkedList d = new DoublyLinkedList();
-            d.addNode(v);
-            freqList.put(v.freq,d);
-        } else{
-            freqList.get(v.freq).addNode(v);
-        }
-        return v.val;
+    public V get(K key) {
+        if (!cache.containsKey(key))
+            return null;
+
+        Entry entry = cache.get(key);
+        updateFreq(entry);
+        return entry.value;
     }
 
-    public void put(int key, int value) {
-        if (capacity == 0)
+    public void put(K key, V value) {
+        if (capacity == 0) // if capacity is set to zero, return immediately
             return;
-        if (lfuCache.get(key) != null) {
-            Node v = lfuCache.get(key);
-            freqList.get(v.freq).removeNode(v);
-            if (freqList.get(v.freq).isEmpty()) {
-                if (minFreq == v.freq)
-                    minFreq = v.freq + 1;
+        if (cache.containsKey(key)) {
+            // update entry
+            Entry entry = cache.get(key);
+            updateFreq(entry);
+            entry.value = value;
+        } else {
+            // insert entry
+            if (cache.size() >= capacity) {
+                evictEntry();
             }
-            v.freq += 1;
-            if (freqList.get(v.freq) == null) {
-                DoublyLinkedList d = new DoublyLinkedList();
-                d.addNode(v);
-                freqList.put(v.freq, d);
-            } else{
-                freqList.get(v.freq).addNode(v);
-            }
-            v.val = value;
-        } else{
-            if (lfuCache.size() == capacity) {
-                Node v = freqList.get(minFreq).removeNode();
-                lfuCache.remove(v.key);
-            }
-            Node newNode = new Node(key, value);
-            lfuCache.put(key, newNode);
-            if (freqList.get(1) != null) {
-                freqList.get(1).addNode(newNode);
-            } else{
-                DoublyLinkedList d=new DoublyLinkedList();
-                d.addNode(newNode);
-                freqList.put(1, d);
-            }
+            Entry newEntry = new Entry(key, value);
+            cache.put(key, newEntry);
+            freqList.computeIfAbsent(1, dll -> new DoublyLinkedList()).addNode(newEntry);
             minFreq = 1;
         }
     }
 
-    class Node {
-        int key;
-        int val;
-        Node next;
-        Node prev;
-        int freq = 1;
-        Node(int k,int v){
-            key = k;
-            val = v;
+    public void resize(int newCapacity) {
+        if (newCapacity < 0) {
+            throw new IllegalArgumentException("Capacity cannot be negative");
         }
+        while (cache.size() > newCapacity) {
+            evictEntry();
+        }
+        this.capacity = newCapacity;
     }
-    class DoublyLinkedList {
-        Node head;
-        Node tail;
-        DoublyLinkedList() {
-            head = new Node(-1,-1);
-            tail = new Node(-1,-1);
-            head.next = tail;
-            tail.prev = head;
+
+    private void updateFreq(Entry entry) {
+        int currentFreq = entry.freq;
+        // remove from previous freq list, in case of a tie, node with lru will be removed
+        freqList.get(currentFreq).removeNode(entry);
+        // update minFreq when old freq is equal to minFreq
+        if (freqList.get(currentFreq).isEmpty() && minFreq == currentFreq) {
+            minFreq++;
         }
-        void addNode(Node v){
-            Node next = head.next;
-            head.next = v;
-            v.prev = head;
-            head.next = v;
-            v.next = next;
-            next.prev = v;
+        // increment freq
+        entry.freq++;
+        // add entry to freq list with new frequency
+        freqList.computeIfAbsent(entry.freq, dll -> new DoublyLinkedList()).addNode(entry);
+    }
+
+    private void evictEntry() {
+        if (minFreq == 0) // if minFreq is already 0, there's nothing to remove
+            return;
+        DoublyLinkedList dll = freqList.get(minFreq);
+        Entry entry = dll.removeLast();
+        if (dll.isEmpty()) {
+            freqList.remove(minFreq);
+            minFreq++;
         }
-        Node removeNode(){
-            Node node = tail.prev;
-            node.prev.next = tail;
-            tail.prev = node.prev;
-            return node;
-        }
-        Node removeNode(Node v){
-            Node prev = v.prev;
-            Node next = v.next;
-            prev.next = next;
-            next.prev = prev;
-            return v;
-        }
-        boolean isEmpty(){
-            return head.next == tail;
+        cache.remove(entry.key);
+    }
+
+    private class Entry {
+        K key;
+        V value;
+        int freq;
+        Entry prev, next;
+
+        Entry(K key, V value){
+            this.key = key;
+            this.value = value;
+            this.freq = 1;
         }
     }
 
+    /**
+     * DLL which adds a new entry to the beginning of the list and removes entry from the end of the list
+     * This simulates LRU in case of tie
+     */
+    private class DoublyLinkedList {
+        Entry head, tail;
+        private int size;
+        DoublyLinkedList() {
+            head = new Entry(null, null);
+            tail = new Entry(null, null);
+            head.next = tail;
+            tail.prev = head;
+            size = 0;
+        }
+
+        void addNode(Entry entry) {
+            Entry next = head.next;
+            head.next = entry;
+            entry.prev = head;
+            entry.next = next;
+            next.prev = entry;
+            size++;
+        }
+
+        void removeNode(Entry entry) {
+            Entry prev = entry.prev;
+            Entry next = entry.next;
+            prev.next = next;
+            next.prev = prev;
+            size--;
+        }
+
+        Entry removeLast() {
+            if (size > 0) {
+                Entry entry = tail.prev;
+                removeNode(entry);
+                return entry;
+            }
+            return null;
+        }
+
+        boolean isEmpty() {
+            return size == 0;
+        }
+    }
+
+    // Debugging method to display the current state of the cache
+    public void displayCache() {
+        System.out.println("Cache Contents:");
+        cache.forEach((key, entry) -> System.out.println(key + " -> " + entry.value + " (Freq: " + entry.freq + ")"));
+        System.out.println("Frequency Map:");
+        freqList.forEach((freq, list) -> {
+            System.out.print("Freq " + freq + ": ");
+            Entry current = list.head.next;
+            while (current != list.tail) {
+                System.out.print(current.key + " ");
+                current = current.next;
+            }
+            System.out.println();
+        });
+    }
+
+    public static void main(String[] args) {
+        LFUCache<Integer, String> lfuCache = new LFUCache<>(3);
+
+        {
+            // Test Case 1: Normal usage and resize
+            lfuCache.put(1, "A");
+            lfuCache.put(2, "B");
+            lfuCache.put(3, "C");
+
+            System.out.println(lfuCache.get(1)); // Access key 1 (increases its frequency)
+            lfuCache.displayCache();
+            lfuCache.put(4, "D"); // Evicts key 2 (least frequently used)
+
+            System.out.println(lfuCache.get(2)); // null (evicted)
+            System.out.println(lfuCache.get(3)); // C
+            System.out.println(lfuCache.get(4)); // D
+
+            lfuCache.resize(2); // Resize cache to capacity 2
+            lfuCache.put(5, "E"); // Evicts least frequently used key
+
+            lfuCache.displayCache();
+        }
+
+        {
+            // Test Case 2: Resize cache to lower capacity
+            lfuCache.put(1, "A");
+            lfuCache.put(2, "B");
+            lfuCache.put(3, "C");
+
+            lfuCache.get(1);
+            lfuCache.get(1);
+
+            lfuCache.get(2);
+
+            lfuCache.displayCache();
+
+            lfuCache.resize(1);
+
+            lfuCache.displayCache();
+        }
+    }
 }
