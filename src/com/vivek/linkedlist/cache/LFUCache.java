@@ -8,6 +8,13 @@ import java.util.Map;
  *
  * LFU evicts keys from the cache based on least frequent usage. However, in case of tie, it evicts keys which are least recently used
  *
+ * Time Complexity:
+ *  get : O(1)
+ *  put : O(1)
+ *  resize : O(1) or O(k) where k is number of evictions needed for downsizing cache
+ *
+ * Space Complexity: O(1) for all operations
+ *
  * https://www.enjoyalgorithms.com/blog/least-frequently-used-cache
  */
 public class LFUCache<K, V> {

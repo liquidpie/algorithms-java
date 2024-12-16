@@ -1,9 +1,7 @@
 package com.vivek.linkedlist.cache;
 
 import java.util.HashMap;
-import java.util.HashSet;
 import java.util.Map;
-import java.util.Set;
 
 /**
  * Implement LRU cache using HashMap and Doubly Linked List
@@ -18,118 +16,137 @@ import java.util.Set;
  */
 public class LRUCache<K, V> {
 
-    private final int CACHE_SIZE;
-    private final Map<K, Entry<K, V>> CACHE;
+    private final Map<K, Entry> cache;
+    private final DoublyLinkedList dll;
+    private int capacity;
 
-    private Entry<K, V> head, tail;
-
-    public LRUCache() {
-        this(16);       // default cache size as 16
-    }
-
-    public LRUCache(int CACHE_SIZE) {
-        this.CACHE_SIZE = CACHE_SIZE;
-        CACHE = new HashMap<>(CACHE_SIZE);
+    public LRUCache(int capacity) {
+        this.capacity = capacity;
+        this.cache = new HashMap<>();
+        this.dll = new DoublyLinkedList();
     }
 
     public V get(K key) {
-        if (CACHE.containsKey(key)) {
-            Entry<K, V> entry = CACHE.get(key);
-            // remove the recently accessed entry from linkedlist
-            remove(entry);
-            // and move to top
-            splayOnTop(entry);
-            return entry.value;
-        }
-        return null;
+        if (!cache.containsKey(key))
+            return null;
+
+        Entry entry = cache.get(key);
+
+        dll.removeNode(entry); // remove the recently accessed entry from DLL
+        dll.addNodeToHead(entry); // and move to top
+        return entry.value;
     }
 
     public void put(K key, V value) {
-        if (CACHE.containsKey(key)) {
-            Entry<K, V> entry = CACHE.get(key);
-            entry.value = value;
-            remove(entry);
-            splayOnTop(entry);
+        if (capacity == 0) {
+            return; // Do nothing if the cache capacity is zero
+        }
+
+        if (cache.containsKey(key)) {
+            Entry entry = cache.get(key);
+            entry.value = value; // Update value
+            dll.removeNode(entry);
+            dll.addNodeToHead(entry); // Move updated node to the head
         } else {
-            Entry<K, V> entry = new Entry<>();
-            entry.key = key;
-            entry.value = value;
-            // reached the cache size, evict the least recently used entry
-            if (CACHE.size() == CACHE_SIZE) {
-                CACHE.remove(tail.key);
-                remove(tail);
+            if (cache.size() >= capacity) {
+                Entry tailNode = dll.removeTail(); // Evict the least recently used node
+                cache.remove(tailNode.key);
             }
-            // move the recently accessed entry to top
-            splayOnTop(entry);
-            CACHE.put(key, entry);
+
+            Entry newEntry = new Entry(key, value);
+            cache.put(key, newEntry);
+            dll.addNodeToHead(newEntry);
         }
     }
 
-    public Set<Entry<K, V>> entrySet() {
-        return new HashSet<>(CACHE.values());
-    }
-
-    public Set<K> keySet() {
-        return CACHE.keySet();
-    }
-
-    @Override
-    public String toString() {
-        StringBuilder sb = new StringBuilder("{");
-        String delimiter = "";
-        for (Entry<K, V> entry : entrySet()) {
-            sb.append(delimiter).append(entry.key).append("=").append(entry.value);
-            delimiter = ", ";
+    public void resize(int newCapacity) {
+        if (newCapacity < 0) {
+            throw new IllegalArgumentException("Capacity cannot be negative");
         }
-        sb.append("}");
-        return sb.toString();
-    }
 
-    private void splayOnTop(Entry<K, V> entry) {
-        entry.next = head;
-        if (head != null)           // when linkedlist not empty
-            head.prev = entry;
-        head = entry;
-        if (tail == null)           // when first entry
-            tail = head;
-    }
-
-    private void remove(Entry<K, V> entry) {
-        if (entry.prev != null) {
-            entry.prev.next = entry.next;
-        } else {
-            head = entry.next;
+        while (cache.size() > newCapacity) {
+            Entry tailNode = dll.removeTail();
+            cache.remove(tailNode.key);
         }
-        if (entry.next != null) {
-            entry.next.prev = entry.prev;
-        } else {
-            tail = entry.prev;
-        }
+
+        this.capacity = newCapacity;
     }
 
-    private static class Entry<K, V> {
+    private class Entry {
         K key;
         V value;
-        Entry prev;
-        Entry next;
+        Entry prev, next;
+
+        public Entry(K key, V value) {
+            this.key = key;
+            this.value = value;
+        }
     }
 
+    private class DoublyLinkedList {
+        Entry head, tail;
+
+        DoublyLinkedList() {
+            head = new Entry(null, null);
+            tail = new Entry(null, null);
+            head.next = tail;
+            tail.prev = head;
+        }
+
+        void addNodeToHead(Entry entry) {
+            Entry next = head.next;
+            head.next = entry;
+            entry.prev = head;
+            entry.next = next;
+            next.prev = entry;
+        }
+
+        void removeNode(Entry entry) {
+            Entry prev = entry.prev;
+            Entry next = entry.next;
+            prev.next = next;
+            next.prev = prev;
+        }
+
+        Entry removeTail() {
+            if (tail.prev != head) {
+                Entry entry = tail.prev;
+                removeNode(entry);
+                return entry;
+            }
+            return null;
+        }
+    }
+
+    // Debugging method to display the current state of the cache
+    public void displayCache() {
+        System.out.println("Cache Contents:");
+        Entry current = dll.head.next;
+        while (current != dll.tail) {
+            System.out.println(current.key + " -> " + current.value);
+            current = current.next;
+        }
+    }
+
+
     public static void main(String[] args) {
-        LRUCache<Integer, Integer> lruCache = new LRUCache<>(4);
-        lruCache.put(1, 11);
-        lruCache.put(2, 12);
-        lruCache.put(3, 13);
-        lruCache.get(2);
-        lruCache.put(4, 14);
-        lruCache.get(3);
+        LRUCache<Integer, String> lruCache = new LRUCache<>(3);
 
-        System.out.println("Cache before eviction");
-        System.out.println(lruCache);
+        lruCache.put(1, "A");
+        lruCache.put(2, "B");
+        lruCache.put(3, "C");
 
-        lruCache.put(5, 15);
+        System.out.println(lruCache.get(1)); // Access key 1 (move to head)
+        lruCache.put(4, "D"); // Evicts key 2 (least recently used)
 
-        System.out.println("Cache after eviction");
-        System.out.println(lruCache);
+        System.out.println(lruCache.get(2)); // null (evicted)
+        System.out.println(lruCache.get(3)); // C
+        System.out.println(lruCache.get(4)); // D
+
+        lruCache.resize(2); // Resize cache to capacity 2
+        lruCache.put(5, "E"); // Evicts least recently used key
+
+        lruCache.displayCache();
     }
 
 }
