@@ -49,7 +49,7 @@ public class LRUCache<K, V> {
             dll.addNodeToHead(entry); // Move updated node to the head
         } else {
             if (cache.size() >= capacity) {
-                Entry tailNode = dll.removeTail(); // Evict the least recently used node
+                Entry tailNode = dll.removeLast(); // Evict the least recently used node
                 cache.remove(tailNode.key);
             }
 
@@ -65,7 +65,7 @@ public class LRUCache<K, V> {
         }
 
         while (cache.size() > newCapacity) {
-            Entry tailNode = dll.removeTail();
+            Entry tailNode = dll.removeLast();
             cache.remove(tailNode.key);
         }
 
@@ -108,7 +108,7 @@ public class LRUCache<K, V> {
             next.prev = prev;
         }
 
-        Entry removeTail() {
+        Entry removeLast() {
             if (tail.prev != head) {
                 Entry entry = tail.prev;
                 removeNode(entry);

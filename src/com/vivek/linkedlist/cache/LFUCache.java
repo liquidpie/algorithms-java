@@ -43,6 +43,7 @@ public class LFUCache<K, V> {
     public void put(K key, V value) {
         if (capacity == 0) // if capacity is set to zero, return immediately
             return;
+
         if (cache.containsKey(key)) {
             // update entry
             Entry entry = cache.get(key);
@@ -55,7 +56,7 @@ public class LFUCache<K, V> {
             }
             Entry newEntry = new Entry(key, value);
             cache.put(key, newEntry);
-            freqList.computeIfAbsent(1, dll -> new DoublyLinkedList()).addNode(newEntry);
+            freqList.computeIfAbsent(1, dll -> new DoublyLinkedList()).addNodeToHead(newEntry);
             minFreq = 1;
         }
     }
@@ -81,7 +82,7 @@ public class LFUCache<K, V> {
         // increment freq
         entry.freq++;
         // add entry to freq list with new frequency
-        freqList.computeIfAbsent(entry.freq, dll -> new DoublyLinkedList()).addNode(entry);
+        freqList.computeIfAbsent(entry.freq, dll -> new DoublyLinkedList()).addNodeToHead(entry);
     }
 
     private void evictEntry() {
@@ -116,6 +117,7 @@ public class LFUCache<K, V> {
     private class DoublyLinkedList {
         Entry head, tail;
         private int size;
+
         DoublyLinkedList() {
             head = new Entry(null, null);
             tail = new Entry(null, null);
@@ -124,7 +126,7 @@ public class LFUCache<K, V> {
             size = 0;
         }
 
-        void addNode(Entry entry) {
+        void addNodeToHead(Entry entry) {
             Entry next = head.next;
             head.next = entry;
             entry.prev = head;
