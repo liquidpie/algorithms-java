@@ -189,13 +189,29 @@ import java.util.*;
  * we increase the pointer from left. We can similarly apply a binary search here, but I chose to skip it since this problem is already so involved.
  *
  * https://leetcode.com/problems/partition-array-into-two-arrays-to-minimize-sum-difference/description/
+ *
+ * https://www.teamblind.com/post/Salesforce-OA-Hackerrank-Aloha-5-evaluation-tpLHKcPd/33516518
+ *
+ * https://www.geeksforgeeks.org/tug-of-war/
  */
 public class PartitionArrayMinSumDifference {
 
     public static void main(String[] args) {
-        PartitionArrayMinSumDifference driver = new PartitionArrayMinSumDifference();
-        int[] nums = {3,9,7,3};
-        System.out.println(driver.minimumDifference(nums)); // 2
+        {
+            PartitionArrayMinSumDifference driver = new PartitionArrayMinSumDifference();
+            int[] nums = {3, 9, 7, 3};
+            System.out.println(driver.minimumDifference(nums)); // 2
+        }
+        {
+            PartitionArrayMinSumDifference driver = new PartitionArrayMinSumDifference();
+            int[] nums = {3, 4, 5, -3, 100, 1, 89, 54, 23, 20};
+            System.out.println(driver.minimumDifference(nums)); // 0
+        }
+        {
+            PartitionArrayMinSumDifference driver = new PartitionArrayMinSumDifference();
+            int[] nums = {4, 1, 2};
+            System.out.println(driver.minimumDifference(nums)); // 1 todo
+        }
     }
 
     public int minimumDifference(int[] nums) {
