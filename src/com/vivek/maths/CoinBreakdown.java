@@ -1,5 +1,10 @@
 package com.vivek.maths;
 
+/**
+ * Breakdown amount into coins of different denominations.
+ *
+ * Minimize the number of coins
+ */
 public class CoinBreakdown {
 
     public static void main(String[] args) {
