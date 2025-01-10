@@ -28,6 +28,10 @@ package com.vivek.backtracking;
  *
  * Following is the implementation for Tug of War problem. It prints the required arrays.
  *
+ * Time Complexity: O(2^n)
+ *
+ * SpaceComplexity: O(n)
+ *
  * https://www.geeksforgeeks.org/tug-of-war/
  */
 public class TugOfWar {
