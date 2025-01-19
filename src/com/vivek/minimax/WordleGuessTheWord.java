@@ -1,4 +1,4 @@
-package com.vivek.greedy;
+package com.vivek.minimax;
 
 import java.util.ArrayList;
 import java.util.Arrays;
