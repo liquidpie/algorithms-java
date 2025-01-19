@@ -12,7 +12,7 @@ public class FirstNonRepeatableChar {
 	private static char findFirstNonRepeatingChar(String str) {
 		Map<Character, Integer> list = new LinkedHashMap<>(str.length());
 		for (char c : str.toCharArray()) {
-			list.put(c, list.containsKey(c) ? list.get(c) + 1 : 1);
+			list.put(c, list.getOrDefault(c, 0) + 1);
 		}
 		
 		for (Map.Entry<Character, Integer> entry : list.entrySet()) {
