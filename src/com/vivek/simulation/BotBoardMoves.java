@@ -1,4 +1,4 @@
-package com.vivek.botbuilding;
+package com.vivek.simulation;
 
 import java.util.Scanner;
 
