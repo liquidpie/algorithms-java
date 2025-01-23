@@ -9,7 +9,7 @@ import java.util.*;
  * Requirements:
  * Each participant is randomly assigned another participant to give a gift.
  * No one can be assigned to themselves.
- * No one can be assigned to their partner if they're in a couple.
+ * No one can be assigned to their partner if they're a couple.
  *
  * Example:
  *
@@ -23,7 +23,17 @@ import java.util.*;
  *     "Frank": "Eve"
  * }
  *
- * Optimized Approach Using Backtracking
+ * Approach 0: Shifting the array (when couples constraint is not applied)
+ *
+ * Approach 1: Using a queue
+ *
+ * - Iterate for each participant
+ * - Get participant from the queue, if it satisfies the constraints, we move to next participant
+ * - If not, we check another participant from the queue, adding the previous participant to the end of the queue
+ *
+ * Time Complexity: O(n^2)
+ *
+ * Approach 2: Optimized Approach Using Backtracking
  * Key Idea: Instead of random shuffling with retries, the program incrementally builds a valid assignment by considering the constraints at each step.
  * Input:
  * A list of participants.
@@ -50,6 +60,8 @@ import java.util.*;
  * Space Complexity:
  *      O(n) for the recursive stack and tracking assignments.
  *
+ * Reference:
+ * https://github.com/volkodavs/secret-santa
  */
 public class SecretSanta {
 
@@ -63,10 +75,35 @@ public class SecretSanta {
         couples.put("Eve", "Frank");
         couples.put("Frank", "Eve");
 
-        secretSanta(participants, couples);
+        secretSantaUsingQueue(participants, couples);
     }
 
-    static void secretSanta(List<String> participants, Map<String, String> couples) {
+    static void secretSantaUsingQueue(List<String> participants, Map<String, String> couples) {
+        Map<String, String> assignments = new HashMap<>();
+
+        Queue<String> queue = new LinkedList<>(participants);
+
+        for (String giver : participants) {
+            while (!queue.isEmpty()) {
+                String receiver = queue.poll();
+
+                if (!giver.equals(receiver) && !couples.get(giver).equals(receiver)) {
+                    assignments.put(giver, receiver);
+                    break;
+                } else {
+                    queue.add(receiver);
+                }
+            }
+        }
+
+        System.out.println("Secret Santa Assignments:");
+        for (Map.Entry<String, String> entry : assignments.entrySet()) {
+            System.out.println(entry.getKey() + " -> " + entry.getValue());
+        }
+    }
+
+
+    static void secretSantaUsingBacktracking(List<String> participants, Map<String, String> couples) {
         Map<String, String> assignments = new HashMap<>();
         Set<String> used = new HashSet<>();
         boolean found = backtrack(participants, couples, assignments, used, 0);
