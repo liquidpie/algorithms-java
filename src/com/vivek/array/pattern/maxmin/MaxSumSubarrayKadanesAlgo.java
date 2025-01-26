@@ -37,35 +37,23 @@ import java.util.Scanner;
 public class MaxSumSubarrayKadanesAlgo {
 	
 	public static void main(String... args) {
-		
-		try (Scanner in = new Scanner(System.in)) {
-			List<Integer> arr = new ArrayList<>();
-			
-			int n = in.nextInt();
-			
-			for (int i = 0; i < n; i++) {
-				arr.add(in.nextInt());
-			} 
-			
-			System.out.println(maxSumSubArray(arr));
-		}
+		int[] nums = {-2, -3, 4, -1, -2, 1, 5, -3};
+		System.out.println(maxSumSubArray(nums));
 	}
 	
-	private static int maxSumSubArray(List<Integer> arr) {
+	private static int maxSumSubArray(int[] arr) {
 		
 		int maxEndingHere = 0;
 		int maxSoFar = Integer.MIN_VALUE;
 
-		for (Integer num : arr) {
+		for (int num : arr) {
 			if (maxEndingHere < 0) {
 				maxEndingHere = 0;
 			}
 
 			maxEndingHere += num;
 
-			if (maxSoFar < maxEndingHere) {
-				maxSoFar = maxEndingHere;
-			}
+			maxSoFar = Math.max(maxSoFar, maxEndingHere);
 		}
 		
 		return maxSoFar;

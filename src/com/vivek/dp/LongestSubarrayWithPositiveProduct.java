@@ -1,7 +1,7 @@
 package com.vivek.dp;
 
 /**
- * Maximum Length of Subarray With Positive Product
+ * 1567. Maximum Length of Subarray With Positive Product
  *
  * Given an array of integers nums, find the maximum length of a subarray where the product of all its elements is positive.
  *
@@ -56,7 +56,7 @@ package com.vivek.dp;
  * https://leetcode.com/problems/maximum-length-of-subarray-with-positive-product/solutions/820072/easy-soultion-with-dry-run-java/
  * https://leetcode.com/problems/maximum-length-of-subarray-with-positive-product/description/
  */
-public class SubarrayMaxProduct {
+public class LongestSubarrayWithPositiveProduct {
 
     public static void main(String[] args) {
         int[] nums = {9, 5, 8, 2, -6, 4, -3, 0, 2, -5, 15, 10, -7, 9, -2};
