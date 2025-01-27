@@ -11,7 +11,7 @@ package com.vivek.stack;
  *
  * Example: 2->3->1->4
  */
-public class GetMinValueUsingLinkedList {
+public class GetMinValueUsingDLL {
 
     private static Node tail = null;
 
