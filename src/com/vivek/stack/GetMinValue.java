@@ -3,10 +3,15 @@ package com.vivek.stack;
 import java.util.Stack;
 
 /**
+ * 155. Min Stack
+ *
  * To retrieve the current minimum, just return the top element from minimum stack.
  * Each time you perform a push operation, check if the pushed element is a new minimum. If it is, push it to the minimum stack too.
  * When you perform a pop operation, check if the popped element is the same as the current minimum. If it is, pop it off the minimum stack too.
  * If the value being pushed is equal to the current minimum, you push that value to the minimum stack as well.
+ *
+ * Reference:
+ * https://leetcode.com/problems/min-stack/description/
  */
 public class GetMinValue {
 	
