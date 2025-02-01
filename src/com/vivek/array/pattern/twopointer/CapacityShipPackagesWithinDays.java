@@ -1,4 +1,4 @@
-package com.vivek.array.pattern.leftright;
+package com.vivek.array.pattern.twopointer;
 
 /**
  * Capacity To Ship Packages Within D Days

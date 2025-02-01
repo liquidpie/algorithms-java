@@ -1,4 +1,4 @@
-package com.vivek.array.pattern.leftright;
+package com.vivek.array.pattern.twopointer;
 
 import java.util.Arrays;
 import java.util.Scanner;

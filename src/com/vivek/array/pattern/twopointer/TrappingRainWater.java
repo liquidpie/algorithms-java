@@ -1,4 +1,4 @@
-package com.vivek.array.pattern.leftright;
+package com.vivek.array.pattern.twopointer;
 
 /**
  * Given n non-negative integers representing an elevation map where the width of each bar is 1,

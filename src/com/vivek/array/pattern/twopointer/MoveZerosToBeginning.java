@@ -1,4 +1,4 @@
-package com.vivek.array.pattern.partitioning;
+package com.vivek.array.pattern.twopointer;
 
 import com.vivek.utils.Utils;
 
