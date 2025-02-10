@@ -4,7 +4,8 @@ package com.vivek.string;
  * Implementation of Knuth-Morris-Pratt (KMP) algorithm
  * for Pattern matching
  *
- * Created by VJaiswal on 13/10/17.
+ * Reference:
+ * https://www.youtube.com/watch?v=V5-7GzOfADQ
  */
 public class PatternMatchKMP {
 
