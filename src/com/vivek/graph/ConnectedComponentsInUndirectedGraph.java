@@ -4,8 +4,6 @@ import java.util.ArrayList;
 import java.util.List;
 
 /**
- * Count Number of connected components in an undirected graph
- *
  * Given an undirected graph g, the task is to print the number of connected components in the graph.
  *
  * Examples:
