@@ -25,7 +25,8 @@ package com.vivek.dp;
  *
  *
  *
- * According to the constraint of the problem, c = c’ = c” is not possible simultaneously, so either c’ != c or c” != c or both. There are k – 1 possibility for c’ != c and k – 1 for c” != c.
+ * According to the constraint of the problem, c = c’ = c” is not possible simultaneously, so either c’ != c or c” != c or both.
+ * There are k – 1 possibility for c’ != c and k – 1 for c” != c.
  *
  *  diff = no of ways when color of last
  *         two posts is different
