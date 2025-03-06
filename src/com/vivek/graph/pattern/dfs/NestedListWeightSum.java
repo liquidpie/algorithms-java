@@ -1,9 +1,7 @@
 package com.vivek.graph.pattern.dfs;
 
 import java.util.ArrayList;
-import java.util.HashSet;
 import java.util.List;
-import java.util.Set;
 
 /**
  * 339. Nested List Weight Sum
