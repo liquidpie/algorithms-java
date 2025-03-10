@@ -93,7 +93,7 @@ public class LCABinaryTreeII {
         // Step 3: Check if the LCA is q, meaning p must be in q's subtree
         else if (ans == q)
             // Verify if p is in the subtree of q
-            return dfs(p, q) ? q : null;
+            return dfs(q, p) ? q : null;
         // Step 4: If neither p nor q is the ancestor of the other, return the LCA
         return ans;
     }
@@ -105,8 +105,8 @@ public class LCABinaryTreeII {
         if (root == p || root == q)
             return root;
 
-        Node leftLCA = lowestCommonAncestor(root.left, p, q);
-        Node rightLCA = lowestCommonAncestor(root.right, p, q);
+        Node leftLCA = lca(root.left, p, q);
+        Node rightLCA = lca(root.right, p, q);
 
         if (leftLCA != null && rightLCA != null)
             return root;
@@ -114,14 +114,14 @@ public class LCABinaryTreeII {
         return leftLCA != null ? leftLCA : rightLCA;
     }
 
-    private static boolean dfs(Node root, Node node) {
-        if (root == null)
+    private static boolean dfs(Node node, Node target) {
+        if (node == null)
             return false;
 
-        if (root == node)
+        if (node == target)
             return true;
 
-        return dfs(root.left, node) || dfs(root.right, node);
+        return dfs(node.left, target) || dfs(node.right, target);
     }
 
 }
