@@ -1,4 +1,4 @@
-package com.vivek.stack.examples;
+package com.vivek.stack.monotonicstack;
 
 import java.util.Stack;
 

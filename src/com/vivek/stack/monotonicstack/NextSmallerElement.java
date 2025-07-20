@@ -1,7 +1,6 @@
-package com.vivek.stack;
+package com.vivek.stack.monotonicstack;
 
 import java.util.Arrays;
-import java.util.HashMap;
 import java.util.Stack;
 
 /**
