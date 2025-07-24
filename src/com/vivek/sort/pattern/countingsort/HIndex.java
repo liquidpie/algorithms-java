@@ -1,4 +1,4 @@
-package com.vivek.array;
+package com.vivek.sort.pattern.countingsort;
 
 import java.util.Arrays;
 
