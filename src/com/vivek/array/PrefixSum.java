@@ -1,7 +1,8 @@
 package com.vivek.array;
 
 /**
- * Given an array arr[] of size N, find the prefix sum of the array. A prefix sum array is another array prefixSum[] of the same size, such that the value of prefixSum[i] is arr[0] + arr[1] + arr[2] . . . arr[i].
+ * Given an array arr[] of size N, find the prefix sum of the array. A prefix sum array is another array prefixSum[] of the same size,
+ * such that the value of prefixSum[i] is arr[0] + arr[1] + arr[2] . . . arr[i].
  *
  * Examples:
  *
