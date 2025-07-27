@@ -50,7 +50,7 @@ public class LongestConsecutiveSequence {
      *     Time complexity: O(n)
      *     Space complexity: O(n) auxiliary space
      */
-    public int longestConsecutive(int[] nums) {
+    public int longestConsecutiveApproach1(int[] nums) {
         Map<Integer, Integer> table = new HashMap<>();
 
         int maxCount = 0;
@@ -78,7 +78,7 @@ public class LongestConsecutiveSequence {
      * The length of the streak is then simply y-x and we update our global best with that.
      * Since we check each streak only once, this is overall O(n).
      */
-    public int longestConsecutiveApproach1(int[] nums) {
+    public int longestConsecutive(int[] nums) {
         Set<Integer> set = new HashSet<>();
         for (int num : nums) {
             set.add(num);
