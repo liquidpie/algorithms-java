@@ -54,13 +54,14 @@ public class BuildTreeFromInorderPostorder {
 
     static int pIndex;
 
-    static Node buildTree(int[] postOrder, int[] inOrder, int inStart, int inEnd, int postStart, int postEnd) {
+    static Node buildTree(int[] postOrder, int[] inOrder) {
         Map<Integer, Integer> inOrderSet = new HashMap<>();
         for (int i = 0; i < inOrder.length; i++)
             inOrderSet.put(inOrder[i], i);
 
-        pIndex = postOrder.length - 1;
-        return buildTree(postOrder, inOrderSet, inStart, inEnd, postStart, postEnd);
+        int n = inOrder.length;
+
+        return buildTree(postOrder, inOrderSet, 0, n - 1, 0, n - 1);
     }
 
     private static Node buildTree(int[] postOrder, Map<Integer, Integer> inOrder, int inStart, int inEnd, int postStart, int postEnd) {
@@ -85,9 +86,7 @@ public class BuildTreeFromInorderPostorder {
         int[] postorder = { 8, 4, 5, 2, 6, 7, 3, 1 };
         int[] inorder   = { 4, 8, 2, 5, 1, 6, 3, 7 };
 
-        int n = inorder.length;
-
-        Node root = buildTree(postorder, inorder, 0, n - 1, 0, n - 1);
+        Node root = buildTree(postorder, inorder);
         Traversal traversal = new Traversal();
         traversal.preOrder(root);
     }
