@@ -1,4 +1,4 @@
-package com.vivek.tree.dfs;
+package com.vivek.tree.pattern.dfs;
 
 import com.vivek.tree.Node;
 
