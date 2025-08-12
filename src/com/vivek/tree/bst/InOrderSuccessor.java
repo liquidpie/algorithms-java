@@ -1,4 +1,6 @@
-package com.vivek.tree;
+package com.vivek.tree.bst;
+
+import com.vivek.tree.Node;
 
 /**
  * To find the ‘next’ node (e.g., in-order successor) of a given node
