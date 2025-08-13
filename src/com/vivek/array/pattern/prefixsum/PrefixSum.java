@@ -1,4 +1,4 @@
-package com.vivek.array;
+package com.vivek.array.pattern.prefixsum;
 
 /**
  * Given an array arr[] of size N, find the prefix sum of the array. A prefix sum array is another array prefixSum[] of the same size,
