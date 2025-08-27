@@ -34,23 +34,23 @@ public class MaxVowelsInSubstringOfSizeK {
     public int maxVowels(String s, int k) {
         Set<Character> vowels = Set.of('a', 'e', 'i', 'o', 'u');
 
-        int curr = 0;
-        for (int i = 0; i < k; i++) {
-            if (vowels.contains(s.charAt(i)))
-                curr++;
+        int begin = 0;
+        int vowel = 0;
+        int maxVowel = 0;
+
+        for (int end = 0; end < s.length(); end++) {
+            if (vowels.contains(s.charAt(end)))
+                vowel++;
+
+            if (end - begin + 1 == k) {
+                maxVowel = Math.max(maxVowel, vowel);
+                if (vowels.contains(s.charAt(begin)))
+                    vowel--;
+                begin++;
+            }
         }
 
-        int maxVowels = curr;
-        for (int i = k; i < s.length(); i++) {
-            if (vowels.contains(s.charAt(i - k)))
-                curr--;
-            if (vowels.contains(s.charAt(i)))
-                curr++;
-
-            maxVowels = Math.max(maxVowels, curr);
-        }
-
-        return maxVowels;
+        return maxVowel;
     }
 
 }
