@@ -1,4 +1,4 @@
-package com.vivek.graph.examples;
+package com.vivek.graph.pattern.dfs;
 
 import java.util.HashSet;
 import java.util.Set;
