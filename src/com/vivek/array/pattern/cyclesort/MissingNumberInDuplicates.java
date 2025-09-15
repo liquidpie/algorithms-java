@@ -4,7 +4,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 /**
- * Find all Missing Numbers (easy)
+ * Find all Missing Numbers (easy) | 448. Find All Numbers Disappeared in an Array
  *
  * We are given an unsorted array containing numbers taken from the range 1 to ‘n’. The array can have
  * duplicates, which means some numbers will be missing. Find all those missing numbers.
@@ -31,6 +31,8 @@ import java.util.List;
  * Reference:
  * Grokking the Coding Interview
  * Pattern: Cycle Sort
+ *
+ * https://leetcode.com/problems/find-all-numbers-disappeared-in-an-array/
  */
 public class MissingNumberInDuplicates {
 
