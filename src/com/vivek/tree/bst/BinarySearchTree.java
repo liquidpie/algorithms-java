@@ -37,6 +37,25 @@ public class BinarySearchTree {
         return root;
     }
 
+    /**
+     * Case 1: Node has No Children (Leaf Node)
+     * If the target node is a leaf node, it can be directly removed from the tree since it has no child to maintain.
+     *
+     * Case 2: Node has One Child(Left or Right Child)
+     * If the target node has only one child, we remove the node and connect its parent directly to its only child.
+     * This way, the tree remains valid after deletion of target node.
+     *
+     * Case 3: Node has Two Children
+     * If the target node has two children, deletion is slightly more complex.
+     * To maintain the BST property, we need to find a replacement node for the target. The replacement can be either:
+     *
+     *     The inorder successor — the smallest value in the right subtree, which is the next greater value than the target node.
+     *     The inorder predecessor — the largest value in the left subtree, which is the next smaller value than the target node.
+     *
+     * Once the replacement node is chosen, we replace the target node’s value with that node’s value,
+     * and then delete the replacement node, which will now fall under Case 1 (no children) or Case 2 (one child).
+     * Note: Inorder predecessor can also be used.
+     */
     Node delete(Node root, int value) {
         if (root == null) {
             return root;
