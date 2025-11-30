@@ -19,6 +19,10 @@ package com.vivek.maths;
  * Input: num = 0
  * Output: 0
  *
+ * Solution:
+ *      This question essentially asks you to find the digital root.
+ *      https://en.wikipedia.org/wiki/Digital_root
+ *
  * Reference: https://leetcode.com/problems/add-digits/description/
  */
 public class AddDigits {
@@ -29,10 +33,7 @@ public class AddDigits {
     }
 
     public int addDigits(int num) {
-        if (num == 0)
-            return num;
-
-        return (num - 1) % 9 + 1;
+        return num == 0 ? 0 : num % 9 == 0 ? 9 : num % 9;
     }
 
     public int addDigitsUsingLoop(int num) {
