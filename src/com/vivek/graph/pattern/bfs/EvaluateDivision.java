@@ -41,6 +41,15 @@ import java.util.*;
  */
 public class EvaluateDivision {
 
+    public static void main(String[] args) {
+        EvaluateDivision helper = new EvaluateDivision();
+
+        List<List<String>> equations = List.of(List.of("a","b"), List.of("b","c"));
+        double[] values = {2.0, 3.0};
+        List<List<String>> queries = List.of(List.of("a","c"), List.of("b","a"), List.of("a","e"), List.of("a","a"), List.of("x","x"));
+        System.out.println(Arrays.toString(helper.calcEquation(equations, values, queries)));
+    }
+
     public double[] calcEquation(List<List<String>> equations, double[] values, List<List<String>> queries) {
         Map<String, Map<String, Double>> adj = new HashMap<>();
 
@@ -48,8 +57,8 @@ public class EvaluateDivision {
             List<String> equation = equations.get(i);
             double value = values[i];
 
-            adj.computeIfAbsent(equation.get(0), k -> new HashMap()).put(equation.get(0), 1.0);
-            adj.computeIfAbsent(equation.get(1), k -> new HashMap()).put(equation.get(1), 1.0);
+            adj.computeIfAbsent(equation.get(0), k -> new HashMap<>()).put(equation.get(0), 1.0);
+            adj.computeIfAbsent(equation.get(1), k -> new HashMap<>()).put(equation.get(1), 1.0);
 
             adj.get(equation.get(0)).put(equation.get(1), value);
             adj.get(equation.get(1)).put(equation.get(0), 1 / value);
@@ -62,6 +71,7 @@ public class EvaluateDivision {
             String end = query.get(1);
 
             result[i] = adj.containsKey(start) && adj.containsKey(end) ? bfs(adj, start, end) : -1.0;
+//            result[i] = dfs(adj, start, end, new HashSet<>());
         }
 
         return result;
@@ -87,6 +97,27 @@ public class EvaluateDivision {
             }
         }
 
+        return -1.0;
+    }
+
+    /**
+     * dfs solution: https://leetcode.com/problems/evaluate-division/solutions/171649/1ms-dfs-with-explanations-by-gracemeng-podz/?envType=study-plan-v2&envId=top-interview-150
+     */
+    private double dfs(Map<String, Map<String, Double>> adj, String start, String end, Set<String> visited) {
+        if (!adj.containsKey(start))
+            return -1.0;
+
+        if (adj.get(start).containsKey(end))
+            return adj.get(start).get(end);
+
+        visited.add(start);
+        for (Map.Entry<String, Double> neighbor : adj.get(start).entrySet()) {
+            if (!visited.contains(neighbor.getKey())) {
+                double productWeight = dfs(adj, neighbor.getKey(), end, visited);
+                if (productWeight != -1.0)
+                    return productWeight * neighbor.getValue();
+            }
+        }
         return -1.0;
     }
 
